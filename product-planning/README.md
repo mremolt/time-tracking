@@ -11,6 +11,6 @@ Feature analysis, decisions, binding UX design and implementation plan for an in
 | [features.md](features.md) | Index of all features with priority and step (MVP 62 · Phase 2 5 · Out of scope 18) |
 | [background.md](background.md) | History and rationale: decision options, lessons from cycle 1, accepted risks R-01 – R-05, research sources |
 
-The docs are structured so that a coding agent reads `context.md` plus one step file and the UX files it names (see [AGENTS.md](AGENTS.md)). Each fact lives in one place: feature descriptions in the step that builds them, decisions in `context.md`, design values in `ux/`.
+The docs are structured so that a coding agent reads `context.md` plus one step file and the UX files it names (see [AGENTS.md](AGENTS.md)). Each fact lives in one place: feature descriptions in the step that builds them, decisions in `context.md`, design values in `ux/`. After changing these docs, run `node product-planning/scripts/lint-docs.mjs` (links, Read lines, feature and decision IDs, reading budget per step).
 
 Priorities: **MVP** – first productive release · **Phase 2** – shortly after go-live · **Out of scope** – deliberately not built.
