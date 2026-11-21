@@ -1,6 +1,6 @@
 # 6. UX Design (binding for implementation)
 
-Status: **approved by the product owner on 2026-11-21**, light and dark theme. This document is the written form of the approved mockups. It is **binding** for every screen built in the implementation plan ([05-implementation-plan.md](05-implementation-plan.md)): a screen is not done until it matches this document and the mockups (see the Definition of Done, §5.2). It names no UI framework; how it is built is up to the technical team.
+Status: **approved by the product owner on 2026-11-21**, light and dark theme; the PDF layout (§6.9) approved on the same day. This document is the written form of the approved mockups. It is **binding** for every screen and every generated PDF built in the implementation plan ([05-implementation-plan.md](05-implementation-plan.md)): a screen is not done until it matches this document and the mockups (see the Definition of Done, §5.2). It names no UI framework; how it is built is up to the technical team.
 
 ---
 
@@ -53,6 +53,8 @@ Each artboard is one HTML file (inline styles, a small `renderVals()` script hol
 **Precedence:** this document and the mockups define the target. Where they conflict with the decisions in [03-decisions.md](03-decisions.md) (e.g. visibility D-10) or with an accessibility requirement, the decision or the accessibility requirement wins and the deviation is written down. Mockup elements without a feature behind them are not built (see §6.7).
 
 Only three screens are drawn. All other screens follow the shell, the building blocks and the patterns in §6.4.4.
+
+**Generated PDFs** have their own approved mockups and rules on a separate canvas: see [§6.9](#69-generated-pdfs-binding-for-every-pdf) (D-22).
 
 ---
 
@@ -237,6 +239,7 @@ Built once in step 1 (charts by step 10 at the latest) and reused by every scree
 | Notice card | "Things to check" list with action links |
 | Loading / empty / error states | For every page and card |
 | Charts | Ring progress, grouped bar chart with target line, donut, stacked bar, day timeline. Each has a text alternative (summary label and an optional data table) and works in forced-colours mode. Lightweight – no large chart library is needed for these five forms. |
+| PDF building blocks | Page frame, tiles, table card, charts and tagging for generated PDFs – see §6.9.5 |
 
 ---
 
@@ -247,6 +250,7 @@ Built once in step 1 (charts by step 10 at the latest) and reused by every scree
 - Everything works with the keyboard only, including the navigation rail, the timesheet and dialogs (focus is trapped in the dialog and returns afterwards).
 - Automated accessibility checks run in every theme variant (light, dark, high contrast, forced colours) and in phone and desktop window sizes.
 - The theme follows the system setting by default; the user's explicit choice overrides it (D-14).
+- Generated PDFs are accessible too: tagged PDF/UA, readable in greyscale print, charts labelled directly (§6.9.4).
 
 ## 6.8 Not built, although the mockups show it
 
@@ -255,3 +259,106 @@ Built once in step 1 (charts by step 10 at the latest) and reused by every scree
 | Search field in the top bar | Not built (D-16) – no search use case exists. The slot stays free. |
 | Month tab in the Day \| Week switch | Not built (D-17) – the month view lives in Balance & summary. |
 | Anything else without a feature ID in [02-feature-catalog.md](02-feature-catalog.md) | Not built; raise it as a change request instead. |
+
+---
+
+## 6.9 Generated PDFs (binding for every PDF)
+
+Status: **approved by the product owner on 2026-11-21** (→ D-22). Every PDF the application generates uses this layout, **Layout B "Report"**. It continues the look of the light web design (§6.3–§6.6) on paper. Mockups: `PdfRecord.dc.html` (monthly working-time record) and `PdfOverview.dc.html` (company overview), see §6.9.6.
+
+### 6.9.1 Scope
+
+| PDF | Feature | Notes |
+|---|---|---|
+| User report, incl. the **monthly working-time record** | F-03, F-05 | Per person: "Personal data – confidential" |
+| Project report | F-02, F-05 | Per person only for the roles allowed to see it (D-10) |
+| Dashboard and Management overview | F-01, F-14, D-19 | Sums only: no person's name anywhere in the file |
+| Any other report or export that offers PDF (e.g. own-data copy, H-03) | F-05, H-03 | Same layout. No PDF gets its own design. |
+| Payroll export | F-13 | Uses the format agreed with payroll (step 0.2). If that format is a PDF, it uses this layout. |
+
+### 6.9.2 Page and structure
+
+- **Paper:** A4 portrait. Landscape only if a table cannot fit in portrait (e.g. a project report with many columns); everything else stays the same. Side margins 40 px (about 10.5 mm) at 96 px/in.
+- **Always the light tokens** (§6.5) on white paper, whatever theme the user has chosen. There is no dark PDF.
+- **Header band (first page):** full width in `accentSoft`, holding:
+  - the product mark (34 px rounded square in `accent` with the clock icon), the product name (15/600) and the company name below it
+  - on the right, a white pill with the document type in `accentInk` ("Monthly working-time record"). Aggregated PDFs show "Sums only, no individual person is shown" there instead.
+  - the document title as the only `h1` (24/700, letter spacing −0.02em): period and subject, e.g. "October 2026 · Anna Berger" or "Company overview"
+  - below it, a context line in `accentInk`, showing every applied filter and fact the reader needs: personnel no., team, federal state, weekly target and period for a person; period, teams, number of people and "data as of" for aggregates.
+- **Following pages:** a compact running head instead of the band (24 px mark, product name, document title, period, 1 px `border` line below). The table header row is repeated at the top of every page a table continues on. A row is never split across pages.
+- **Figure tiles** below the header: 4–5 tiles as in the app (16 px radius, 1 px `border`, label 12/500 `muted`, value 22/700, one sub-line). A warning tile uses `warnBg` / `warnBorder` / `warnInk`. The highlighted balance tile uses `accentSoft` / `accentInk`.
+- **Cards:** each section is a card (1 px `border`, 18 px radius, no shadow) with a 15/600 `h2` title. Sections follow the order of the matching screen.
+- **Tables:** inside a card. The header row is on `subtle` (600, `ink2`), with 1 px `border` lines between rows. Numbers are right-aligned with tabular figures. The total row is on `subtle`, 700. Weekend rows are on `subtle` with `muted` text and the word "Weekend" (or the holiday's name). Absences, rule findings (H-06) and budget states are **status chips** with text and an icon, as in the app.
+- **Record status line** at the end of the content:
+  - locked period: "Period locked on {date} by backoffice; later changes are in the audit log."
+  - open period, as warning text: "Period not locked – figures can still change."
+- **Footer on every page** (12 px, `muted`, 1 px `border` line above):
+  - left, a confidentiality label: lock icon + "Personal data – confidential" for any PDF with per-person data; "Sums only – no person shown" for aggregates
+  - centre: "Generated {date}, {time} · Time Tracking"
+  - right: "Page {n} of {total}"
+- **Type:** Inter (400–700), embedded in the file. Nothing smaller than 12 px (9 pt). Body text 12 px, line height 1.45. Times in `h:mm`; dates and numbers in the language of the user who generates the PDF (DE/EN, D-12).
+- **Content rules:** the PDF shows exactly the data the screen or report shows for that role, with the same filters (D-10). The rules of this document apply to the figures, not the mockups' sample values: plausible values only, balances as in D-20, thresholds as in D-21, project colours as in D-18.
+
+### 6.9.3 Charts in PDFs
+
+Paper has no hover and no tooltips, and many people print in greyscale. So a chart in a PDF must be readable **without colour**:
+
+| Chart | In the PDF |
+|---|---|
+| Grouped bars (hours per week) | As on screen: worked = `accent`, booked = `booked` **with a 1 px outline in the dark booked colour `#3E63B0`**, target as a dashed `ink` line per group. Each bar carries its value label; week number and date range below. |
+| Hours by project (donut on screen) | **Labelled bar list**, sorted by hours: project colour dot + code, a bar in the project colour on a `track`, hours; total row at the end. No donut in PDFs. |
+| Share of booked time (stacked bar on screen) | **Small labelled bars:** one cell per project with code, hours and its own bar. No stacked bar in PDFs. |
+| Completeness by team, budget usage | Bars on a `track`. **Warning bars are hatched** (45°, stripes `warnStrong` 3 px / `missingBar` 3 px, as the break band on Today), always next to their text ("84 % · below 90 %", "93 % · over 80 %"). |
+| "Other" in any chart | `#7A8494` instead of the light grey `#CBD2DC` (which is too faint on paper). |
+
+Rules:
+- **Direct labelling:** every coloured mark sits in the same row or cell as its label and value. No legend that is matched by colour.
+- Every chart has its values printed on it or next to it, and a text alternative (§6.9.4).
+
+### 6.9.4 Accessibility (part of the layout)
+
+- **Accessible PDF:** every PDF is a tagged PDF that conforms to **PDF/UA-1** (ISO 14289-1):
+  - document language (`de` / `en`) and title (the `h1`) set in the file's metadata, with the title shown in the viewer's title bar
+  - logical reading order: header, tiles, sections in visual order, footer
+  - structure tags: one `H1`, `H2` per card; real `Table` tags with `TH` header cells (`scope` column), plus row headers for the first column (date, project, team)
+  - each chart is a `Figure` with alternative text that names all its values (e.g. "Hours per week, October 2026. Week 40: worked 172, booked 152, target 192 …")
+  - decoration is marked as artifact: header band, lines, colour dots, bars that only repeat a printed value, running head and footer
+  - all text is real text with embedded fonts and correct Unicode mapping (copy and search work), never an image of text
+  - bookmarks for each `H2` when the PDF has more than one page
+- **Contrast, in colour and in greyscale:**
+  - text at least **4.5:1**
+  - graphic parts that carry meaning (bars, outlines, icons) at least **3:1** against their background
+  - elements that must be told apart (worked vs booked, warning vs normal bars) differ in **lightness or texture**, not in hue only
+  - checked with the colours converted to grey. Checked values for the approved layout: all text ≥ 5.4:1, worked vs booked 3.9:1. The four project colours turn into almost the same grey (1.0–1.3:1), which is why direct labelling (§6.9.3) is required.
+- **Never colour alone** (§6.7): status always has text and an icon; colour dots and bars always have their code or value next to them.
+- **Acceptance per PDF template:**
+  - an automated PDF/UA validator reports no errors
+  - a screen-reader spot check (title, headings, one table, one chart)
+  - a greyscale print (or greyscale preview) is fully readable
+  - side-by-side check against the mockups
+
+### 6.9.5 Shared PDF building blocks
+
+Built once (step 14) and reused by every PDF, so that no PDF gets one-off styling:
+
+| Building block | Content |
+|---|---|
+| Page frame | A4 page, margins, header band (first page), running head (following pages), footer with confidentiality label, generation time and page numbers |
+| Figure tile row | 4–5 tiles, normal / warning / highlighted |
+| Table card | Header row repeated per page, total row, weekend and absence rows, status chips |
+| Charts | Grouped bars with target, labelled bar list, small labelled bars, hatched warning bar – each with its alternative text |
+| Record status line | Locked / not locked |
+| Tags and metadata | Language, title, structure tags, artifacts, bookmarks (§6.9.4) |
+
+### 6.9.6 Mockups
+
+Canvas: <https://claude.ai/code/artifact/e37e8102-86b5-439a-b51d-a660c3353281> (private; the owner shares it from its Share menu before others can open it).
+
+| Row | Artboards | Status |
+|---|---|---|
+| Top | A · Ledger (formal document): record and company overview | Not chosen, kept for reference only |
+| Bottom | B · Report: `ReportRecord.dc.html`, `ReportOverview.dc.html` | **Approved target** (D-22) |
+
+**Local copies** in [mockups/](mockups/): [PdfRecord.dc.html](mockups/PdfRecord.dc.html) (monthly working-time record, October 2026) and [PdfOverview.dc.html](mockups/PdfOverview.dc.html) (company overview, October 2026). They are copies of the approved artboards from 2026-11-21. Like the screen mockups, they need the canvas runtime to render and are reference source for exact values. To see them rendered, open the canvas.
+
+The sample figures are illustrative. Both mockups fit on one page; longer PDFs follow the rules for following pages in §6.9.2. Absence days are shown credited with the daily target, following B-15. How each absence type affects the target is still decided in step 0.1, and the PDF shows whatever is decided there.

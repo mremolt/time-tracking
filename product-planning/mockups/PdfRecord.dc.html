@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout B – Monthly working-time record</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#0F5F5C}a:hover{color:#0B4F4C}
+</style>
+</helmet>
+<div style="width: 794px; height: 1123px; box-sizing: border-box; position: relative; background: #FFFFFF; color: #17212F; font-family: Inter, Arial, sans-serif; font-size: 12px; line-height: 1.45; font-variant-numeric: tabular-nums">
+
+  <header style="background: #DCEBEA; padding: 28px 40px 20px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="width: 34px; height: 34px; border-radius: 10px; background: #0F6B67; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></div>
+        <div style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-size: 15px; font-weight: 600">Time Tracking</span><span style="color: #3C4757">[Company name]</span></div>
+      </div>
+      <span style="padding: 4px 12px; border-radius: 999px; background: #FFFFFF; color: #0B4F4C; font-weight: 600">Monthly working-time record</span>
+    </div>
+    <div>
+      <h1 style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">October 2026 · Anna Berger</h1>
+      <p style="margin: 4px 0 0; color: #0B4F4C">Personnel no. 1042 · Team Consulting · Bavaria · Target 40:00 per week (Mon–Fri) · 1 – 31 Oct 2026</p>
+    </div>
+  </header>
+
+  <div style="padding: 18px 40px 0">
+    <section aria-label="Summary" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 16px"><div style="color: #5A6575; font-weight: 500">Target</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">{{s.target}}</div><div style="color: #3C4757">{{s.days}} working days</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 16px"><div style="color: #5A6575; font-weight: 500">Worked</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">{{s.worked}}</div><div style="color: #3C4757">incl. {{s.credit}} absence credit</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 16px"><div style="color: #5A6575; font-weight: 500">Difference</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">{{s.diff}}</div><div style="color: #3C4757">this month</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 16px; background: #DCEBEA; border-color: #DCEBEA"><div style="color: #0B4F4C; font-weight: 500">Balance to date</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3; color: #0B4F4C">{{s.closing}}</div><div style="color: #0B4F4C">opening {{s.opening}}</div></div>
+    </section>
+
+    <div role="table" aria-label="Working time per day, October 2026" style="margin-top: 14px; border: 1px solid #E3E7ED; border-radius: 18px; overflow: hidden">
+      <div role="row" style="display: grid; grid-template-columns: 70px 42px 42px 42px 50px 56px 48px 52px 56px minmax(0, 1fr); column-gap: 7px; height: 28px; padding: 0 14px; align-items: center; background: #F3F5F8; border-bottom: 1px solid #E3E7ED; font-weight: 600; color: #3C4757">
+        <span role="columnheader">Date</span><span role="columnheader" style="text-align: right">Start</span><span role="columnheader" style="text-align: right">End</span><span role="columnheader" style="text-align: right">Break</span><span role="columnheader" style="text-align: right">Worked</span><span role="columnheader" aria-hidden="true"></span><span role="columnheader" style="text-align: right">Target</span><span role="columnheader" style="text-align: right">+/−</span><span role="columnheader" style="text-align: right">Projects</span><span role="columnheader" style="padding-left: 6px">Note</span>
+      </div>
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="31">
+        <sc-if value="{{r.isWork}}" hint-placeholder-val="{{ true }}">
+          <div role="row" style="display: grid; grid-template-columns: 70px 42px 42px 42px 50px 56px 48px 52px 56px minmax(0, 1fr); column-gap: 7px; height: 19px; padding: 0 14px; align-items: center; border-bottom: 1px solid #E3E7ED">
+            <span role="rowheader">{{r.date}}</span><span role="cell" style="text-align: right">{{r.start}}</span><span role="cell" style="text-align: right">{{r.end}}</span><span role="cell" style="text-align: right">{{r.brk}}</span><span role="cell" style="text-align: right; font-weight: 600">{{r.worked}}</span>
+            <span role="cell" aria-hidden="true" style="height: 6px; border-radius: 3px; background: #E6ECEF; overflow: hidden"><span style="display: block; height: 6px; border-radius: 3px; width: {{r.bar}}; background: #0F6B67"></span></span>
+            <span role="cell" style="text-align: right; color: #3C4757">{{r.target}}</span><span role="cell" style="text-align: right">{{r.diff}}</span><span role="cell" style="text-align: right">{{r.booked}}</span>
+            <span role="cell" style="padding-left: 6px; display: flex">
+              <sc-if value="{{r.warn}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; height: 16px; padding: 0 8px; border-radius: 8px; background: #FFF7F2; box-shadow: inset 0 0 0 1px #F5D3BF; color: #7C2D12; font-weight: 600; white-space: nowrap"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20z"></path><path d="M12 10v5M12 18v.01"></path></svg>{{r.note}}</span></sc-if>
+            </span>
+          </div>
+        </sc-if>
+        <sc-if value="{{r.isAbsence}}" hint-placeholder-val="{{ false }}">
+          <div role="row" style="display: grid; grid-template-columns: 70px 42px 42px 42px 50px 56px 48px 52px 56px minmax(0, 1fr); column-gap: 7px; height: 19px; padding: 0 14px; align-items: center; border-bottom: 1px solid #E3E7ED">
+            <span role="rowheader">{{r.date}}</span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell" style="text-align: right; color: #3C4757">{{r.worked}}</span><span role="cell"></span><span role="cell" style="text-align: right; color: #3C4757">{{r.target}}</span><span role="cell" style="text-align: right">{{r.diff}}</span><span role="cell"></span>
+            <span role="cell" style="padding-left: 6px; display: flex"><span style="display: inline-flex; align-items: center; height: 16px; padding: 0 8px; border-radius: 8px; background: #DCEBEA; color: #0B4F4C; font-weight: 600; white-space: nowrap">{{r.note}}</span></span>
+          </div>
+        </sc-if>
+        <sc-if value="{{r.isWeekend}}" hint-placeholder-val="{{ false }}">
+          <div role="row" style="display: grid; grid-template-columns: 70px 42px 42px 42px 50px 56px 48px 52px 56px minmax(0, 1fr); column-gap: 7px; height: 19px; padding: 0 14px; align-items: center; border-bottom: 1px solid #E3E7ED; background: #F3F5F8; color: #5A6575">
+            <span role="rowheader">{{r.date}}</span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell"></span><span role="cell" style="padding-left: 6px; white-space: nowrap; overflow: hidden">{{r.note}}</span>
+          </div>
+        </sc-if>
+      </sc-for>
+      <div role="row" style="display: grid; grid-template-columns: 70px 42px 42px 42px 50px 56px 48px 52px 56px minmax(0, 1fr); column-gap: 7px; height: 26px; padding: 0 14px; align-items: center; background: #F3F5F8; font-weight: 700">
+        <span role="rowheader">Total</span><span role="cell"></span><span role="cell"></span><span role="cell" style="text-align: right">{{s.brk}}</span><span role="cell" style="text-align: right">{{s.worked}}</span><span role="cell"></span><span role="cell" style="text-align: right">{{s.target}}</span><span role="cell" style="text-align: right">{{s.diff}}</span><span role="cell" style="text-align: right">{{s.booked}}</span><span role="cell" style="padding-left: 6px; font-weight: 500; color: #3C4757">2 vacation · 1 sick</span>
+      </div>
+    </div>
+
+    <section style="margin-top: 12px; border: 1px solid #E3E7ED; border-radius: 18px; padding: 10px 16px 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-size: 13px; font-weight: 600">Booked on projects</h2>
+        <span style="color: #3C4757">{{s.booked}} of {{s.actual}} worked · {{s.unbooked}} not booked</span>
+      </div>
+      <ul style="margin: 7px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+        <sc-for list="{{projects}}" as="p" hint-placeholder-count="4"><li style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; gap: 6px"><strong style="font-weight: 600">{{p.code}}</strong><span style="color: #3C4757">{{p.h}}</span></span><span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E6ECEF; overflow: hidden"><span style="display: block; height: 8px; border-radius: 4px; width: {{p.w}}; background: {{p.color}}"></span></span></li></sc-for>
+      </ul>
+    </section>
+
+    <p style="margin: 10px 0 0; color: #3C4757">Period locked on 3 Nov 2026 by backoffice; later changes are in the audit log. Absence days are credited with the daily target (B-15). Times in h:mm.</p>
+  </div>
+
+  <footer style="position: absolute; left: 40px; right: 40px; bottom: 30px; display: flex; justify-content: space-between; gap: 16px; padding-top: 8px; border-top: 1px solid #E3E7ED; color: #5A6575">
+    <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #3C4757"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3C4757" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>Personal data – confidential</span>
+    <span>Generated 3 Nov 2026, 09:14 · Time Tracking</span>
+    <span>Page 1 of 1</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":794,"height":1123}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const RAW = [
+      [1,'Thu','w','08:04','16:41',30,0,''],[2,'Fri','w','07:58','15:12',30,30,''],
+      [3,'Sat','we','','',0,0,'Holiday · Day of German Unity'],[4,'Sun','we','','',0,0,'Weekend'],
+      [5,'Mon','w','08:10','17:02',45,0,''],[6,'Tue','w','08:00','16:30',30,0,''],[7,'Wed','w','07:45','17:20',45,0,''],
+      [8,'Thu','w','08:15','16:40',30,0,''],[9,'Fri','w','08:02','14:20',30,30,''],
+      [10,'Sat','we','','',0,0,'Weekend'],[11,'Sun','we','','',0,0,'Weekend'],
+      [12,'Mon','w','08:05','17:35',45,0,''],[13,'Tue','w','08:00','16:45',30,0,''],[14,'Wed','w','08:20','16:50',30,0,''],
+      [15,'Thu','abs','','',0,0,'Vacation'],[16,'Fri','abs','','',0,0,'Vacation'],
+      [17,'Sat','we','','',0,0,'Weekend'],[18,'Sun','we','','',0,0,'Weekend'],
+      [19,'Mon','w','07:55','16:40',30,0,''],[20,'Tue','w','07:50','17:55',30,0,'Break 0:30, needs 0:45'],
+      [21,'Wed','w','08:10','16:55',30,0,''],[22,'Thu','w','08:00','16:30',30,0,''],[23,'Fri','w','08:05','15:05',30,30,''],
+      [24,'Sat','we','','',0,0,'Weekend'],[25,'Sun','we','','',0,0,'Weekend'],
+      [26,'Mon','w','08:00','16:50',30,0,''],[27,'Tue','abs','','',0,0,'Sick'],
+      [28,'Wed','w','08:12','17:00',30,0,''],[29,'Thu','w','07:50','17:10',30,0,''],[30,'Fri','w','08:00','14:30',30,0,''],
+      [31,'Sat','we','','',0,0,'Weekend']
+    ];
+    const toMin = (s) => { const p = s.split(':'); return Number(p[0]) * 60 + Number(p[1]); };
+    const hm = (m) => Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+    const sg = (m) => m === 0 ? '0:00' : (m > 0 ? '+' : '−') + hm(Math.abs(m));
+    let W = 0, T = 0, B = 0, K = 0, C = 0, days = 0;
+    const rows = RAW.map((d) => {
+      const date = d[1] + ' ' + d[0] + ' Oct';
+      if (d[2] === 'we') return { isWork: false, isAbsence: false, isWeekend: true, date: date, note: d[7] };
+      if (d[2] === 'abs') { C += 480; T += 480; days += 1; return { isWork: false, isAbsence: true, isWeekend: false, date: date, note: d[7] + ' · credited', worked: '8:00', target: '8:00', diff: '0:00' }; }
+      const worked = toMin(d[4]) - toMin(d[3]) - d[5];
+      const booked = worked - d[6];
+      W += worked; T += 480; B += booked; K += d[5]; days += 1;
+      return { isWork: true, isAbsence: false, isWeekend: false, date: date, start: d[3], end: d[4], brk: hm(d[5]), worked: hm(worked), bar: Math.min(100, Math.round(worked / 600 * 100)) + '%', target: '8:00', diff: sg(worked - 480), booked: hm(booked), note: d[7], warn: d[7] !== '' };
+    });
+    const opening = 750;
+    const split = [['CRM-REL', 0.48, '#2563EB'], ['PORTAL', 0.27, '#0F766E'], ['INTERNAL-TOOLS', 0.15, '#B45309'], ['ADMIN', 0.10, '#7C3AED']];
+    let rest = B;
+    const projects = split.map((p, i) => {
+      const m = i === split.length - 1 ? rest : Math.round(B * p[1] / 15) * 15;
+      rest -= m;
+      return { code: p[0], h: hm(m), color: p[2], w: (m / B * 100).toFixed(1) + '%' };
+    });
+    return {
+      rows: rows,
+      projects: projects,
+      s: { target: hm(T), worked: hm(W + C), actual: hm(W), credit: hm(C), diff: sg(W + C - T), booked: hm(B), unbooked: hm(W - B), brk: hm(K), opening: sg(opening), closing: sg(opening + W + C - T), days: days }
+    };
+  }
+}
+</script>
+</body>
+</html>

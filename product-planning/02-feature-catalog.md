@@ -96,7 +96,7 @@ Summary: **MVP 62** · **Phase 2 5** · **Out of scope 18** (see tables below; d
 | F-02 | Project report | Hours per user, per activity, per week/month; entry list; budget consumption. | MVP |
 | F-03 | User report | Working time, project hours, target vs. actual, overtime balance, absences. | MVP |
 | F-04 | Flexible filtering & grouping | Filter and group freely by period, team, project, user, activity. | MVP |
-| F-05 | Export | CSV / Excel for all reports; PDF for user and project reports (e.g. monthly working-time record) and for the dashboard / management overview → **D-19**. | MVP |
+| F-05 | Export | CSV / Excel for all reports; PDF for user and project reports (e.g. monthly working-time record) and for the dashboard / management overview → **D-19**. Every PDF uses the approved PDF layout (tagged PDF/UA, readable in greyscale) → **D-22**, [06-ux-design.md §6.9](06-ux-design.md#69-generated-pdfs-binding-for-every-pdf). | MVP |
 | F-06 | Completeness report | Who has missing days or gaps for the period – basis for locking. | MVP |
 | F-07 | Budget report | All projects with budget, consumption, warning state. | MVP |
 | F-08 | Utilization report | → **D-10**. | Out of scope |
@@ -122,7 +122,7 @@ Summary: **MVP 62** · **Phase 2 5** · **Out of scope 18** (see tables below; d
 |----|---------|-------------|----------|
 | H-01 | Change history for entries | Who created/changed which entry when (old/new value). | MVP |
 | H-02 | Admin action log | User/project administration and period locks. | MVP |
-| H-03 | Own data view & export | Employees view and download their own records (right of access; planned right to a copy). | MVP |
+| H-03 | Own data view & export | Employees view and download their own records (right of access; planned right to a copy). A PDF copy uses the PDF layout → **D-22**. | MVP |
 | H-04 | Automatic retention & deletion | → **D-11** (keep forever) – accepted risk R-01. | Out of scope |
 | H-05 | Visibility rule set | Enforced per role as defined in **D-10**. | MVP |
 | H-06 | Working-time rule checks | Warnings for >10 h/day, missing breaks (30 min > 6 h, 45 min > 9 h), < 11 h rest → **D-01**. | MVP |

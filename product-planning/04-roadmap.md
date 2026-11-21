@@ -53,7 +53,7 @@ The risks R-01 – R-05 (retention, late recording, no second login factor, work
 | Month-end close | Backoffice closes a month (completeness check, payroll export, lock) in < 1 hour. |
 | Reports | Project, user, team and budget reports available without manual spreadsheet work. |
 | Data trust | Every change to an entry is traceable to a person and time. |
-| UX | The product owner confirms that Today, Week and Dashboard match the approved mockups in light and dark theme, and every other screen follows [06-ux-design.md](06-ux-design.md). No automated accessibility violations in any theme variant. |
+| UX | The product owner confirms that Today, Week and Dashboard match the approved mockups in light and dark theme, and every other screen follows [06-ux-design.md](06-ux-design.md). No automated accessibility violations in any theme variant. Every generated PDF uses the approved PDF layout (D-22), is valid PDF/UA and reads correctly in greyscale print. |
 
 ## 4.3 Hand-off notes for the technical team
 
@@ -67,6 +67,12 @@ Points that follow from the feature analysis (the *how* is up to the technical t
   - five simple chart forms (ring, grouped bars, donut, stacked bar, day timeline) – a large chart library is not needed
   - Today combines several data sets (running day, project timer, day view, week summary, findings); load them as a fixed number of requests, never per entry
   - automated accessibility checks in light, dark, high contrast and forced colours, on phone and desktop window sizes
+  - generated PDFs (D-22, [06-ux-design.md §6.9](06-ux-design.md#69-generated-pdfs-binding-for-every-pdf)):
+    - one shared server-side PDF template in the approved layout, A4, always the light tokens
+    - the PDF tooling must produce **tagged PDF/UA-1**: language, title, structure tags, real tables, alternative text for charts, artifacts, bookmarks
+    - Inter embedded in the file
+    - charts drawn as vector graphics in the PDF chart forms (§6.9.3)
+    - check this tooling requirement before choosing a PDF library
   - dates, times and numbers are always formatted per language; implausible figures (e.g. a balance of −57606:52 seen in cycle 1) are a bug, not a display case
 - **Scale:** ~100 users, single company, low data volume – favour simplicity.
 - **Authentication:** own user accounts with passwords (D-02): invitation, reset, lockout; no 2FA in the MVP (R-03).

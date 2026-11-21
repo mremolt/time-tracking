@@ -33,6 +33,7 @@ A step is complete when, for every feature in it:
 - [ ] **UX:** its screen matches [06-ux-design.md](06-ux-design.md) and, for Today, Week and Dashboard, the mockups – in light and dark theme; it uses the shared building blocks and design tokens only (no one-off colours, spacing or fonts),
 - [ ] **UX:** the screen has loading, empty and error states; dates, times and numbers are formatted per language; the figures shown are plausible for the demo data,
 - [ ] **UX:** automated accessibility checks pass in light, dark, high-contrast and forced-colours mode,
+- [ ] **UX (PDF):** every PDF it generates uses the shared PDF template in the approved layout ([06-ux-design.md §6.9](06-ux-design.md#69-generated-pdfs-binding-for-every-pdf), D-22), passes the PDF/UA validator, is fully readable as a greyscale print and matches the PDF mockups,
 - [ ] the backoffice representative has reviewed it in a demo, **including a side-by-side check against the design**.
 
 ---
@@ -231,14 +232,16 @@ Decide and write down:
 - Visibility rules (D-10) applied centrally to every query, report and export.
 - Export to CSV and Excel for all reports. PDF for user and project reports, with DE/EN labels.
 - **UX:** one reusable filter row (date range picker as one control, team and other filters) and an Export menu (CSV, Excel, PDF), as on the dashboard mockup.
+- **UX (PDF):** the shared PDF template and PDF building blocks (§6.9.5) are built here, once: page frame with header band, running head and footer; figure tiles; table card; the PDF chart forms (§6.9.3); tagging and metadata for PDF/UA (§6.9.4). Every PDF in steps 15–17 is configured on this template, never designed on its own.
 
-**Done when:** the same filter returns different data for each role, matching the D-10 matrix, and all three export formats work.
+**Done when:** the same filter returns different data for each role, matching the D-10 matrix, and all three export formats work. A sample PDF from the template passes the PDF/UA validator and the greyscale print check.
 
 ### Step 15 – Reports
 **Features:** F-02, F-03, F-06, F-07, F-09, F-12
 **Goal:** all detailed reports are available.
 - Project report, user report (incl. monthly working-time record as PDF), completeness report, budget report, overtime report, project lead view.
 - **UX:** every report uses the report pattern (§6.4.4): page header, filter row, styled table card, export menu.
+- **UX (PDF):** the monthly working-time record matches the mockup `PdfRecord.dc.html` (§6.9.6); the project report and the other report PDFs use the same template.
 
 **Done when:** each report is checked against hand-calculated demo data and can only be opened by the roles allowed to see it.
 
@@ -248,6 +251,7 @@ Decide and write down:
 - Total hours, hours per project and team, weekly trend, overtime totals, missing time, projects close to their budget.
 - Management view contains **no per-person data**.
 - **UX** ([06-ux-design.md §6.4.3](06-ux-design.md#643-company-dashboard-backoffice-management-uses-the-same-layout), mockup `Dashboard.dc.html`): filter row with team filter, five figure tiles, hours per week (grouped bars with target line), hours by project (donut), project budgets table, completeness by team (below 90 % = warning, D-21), export menu with CSV/Excel/PDF (D-19), overtime tile as cumulative balance (D-20), donut in the projects' own colours (D-18). The Management overview uses the same layout and says "sums only, no person shown" in the top bar.
+- **UX (PDF):** the dashboard / management overview PDF matches the mockup `PdfOverview.dc.html` (§6.9.6). The donut becomes a labelled bar list, and warning bars are hatched (§6.9.3).
 
 **Done when:** the management role cannot reach any per-person data, either through the UI or through exports, and the dashboard matches `Dashboard.dc.html` / `DashboardDark.dc.html`.
 
@@ -256,7 +260,7 @@ Decide and write down:
 **Goal:** the month-end close can be completed and employees can get a copy of their own data.
 - Payroll export exactly in the format agreed in 0.2.
 - Employees view and download all of their own records.
-- **UX:** payroll export under Administration › Month end (tab Payroll export); My data page reached from the account menu (and the Insights group).
+- **UX:** payroll export under Administration › Month end (tab Payroll export); My data page reached from the account menu (and the Insights group). A PDF copy of own data uses the PDF template (§6.9); if payroll agrees on a PDF format in 0.2, it uses the template too.
 
 **Done when:** payroll confirms that an export generated from demo data matches the agreed format, and journey J5 (check → export → lock) takes less than 1 hour.
 
@@ -271,7 +275,7 @@ Decide and write down:
 ### Step 19 – Final stakeholder demo (Milestone M2)
 **Goal:** the complete MVP scope runs locally and is presented to stakeholders. **This is the end of this plan.**
 - **Acceptance check** of all MVP features from [02-feature-catalog.md](02-feature-catalog.md) against the demo data, including role and visibility tests.
-- **UX acceptance:** the product owner confirms the success criterion "UX" ([04-roadmap.md §4.2](04-roadmap.md#42-success-criteria)): Today, Week and Dashboard match the mockups in light and dark theme, all other screens follow [06-ux-design.md](06-ux-design.md), no accessibility violations in any theme variant.
+- **UX acceptance:** the product owner confirms the success criterion "UX" ([04-roadmap.md §4.2](04-roadmap.md#42-success-criteria)): Today, Week and Dashboard match the mockups in light and dark theme, all other screens follow [06-ux-design.md](06-ux-design.md), no accessibility violations in any theme variant; every generated PDF follows §6.9, passes the PDF/UA validator and reads correctly in greyscale print.
 - **Demo installation:** a fresh local installation, following the documented setup, loaded with the full demo data set.
 - **Demo script** that walks through journeys J1–J6 with each role and switches between DE and EN.
 - **Stakeholder demo** with backoffice, HR, payroll, project leads and management.

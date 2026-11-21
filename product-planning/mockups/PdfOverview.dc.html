@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout B – Company overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#0F5F5C}a:hover{color:#0B4F4C}
+</style>
+</helmet>
+<div style="width: 794px; height: 1123px; box-sizing: border-box; position: relative; background: #FFFFFF; color: #17212F; font-family: Inter, Arial, sans-serif; font-size: 12px; line-height: 1.45; font-variant-numeric: tabular-nums">
+
+  <header style="background: #DCEBEA; padding: 28px 40px 20px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="width: 34px; height: 34px; border-radius: 10px; background: #0F6B67; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></div>
+        <div style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-size: 15px; font-weight: 600">Time Tracking</span><span style="color: #3C4757">[Company name]</span></div>
+      </div>
+      <span style="padding: 4px 12px; border-radius: 999px; background: #FFFFFF; color: #0B4F4C; font-weight: 600">Sums only, no individual person is shown</span>
+    </div>
+    <div>
+      <h1 style="margin: 0; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">Company overview</h1>
+      <p style="margin: 4px 0 0; color: #0B4F4C">1 – 31 Oct 2026 · All teams · 12 people · data as of 3 Nov 2026, 09:14</p>
+    </div>
+  </header>
+
+  <div style="padding: 18px 40px 0; display: flex; flex-direction: column; gap: 14px">
+    <section aria-label="Key figures" style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 14px"><div style="color: #5A6575; font-weight: 500">Worked</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">1,812 h</div><div style="color: #3C4757">of 1,904 h target</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 14px"><div style="color: #5A6575; font-weight: 500">Booked on projects</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">1,602 h</div><div style="color: #3C4757"><strong style="color: #0F5F5C">88 %</strong> of worked</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 14px"><div style="color: #5A6575; font-weight: 500">Completeness</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">94 %</div><div style="color: #9A3412">11 days without time</div></div>
+      <div style="border: 1px solid #E3E7ED; border-radius: 16px; padding: 10px 14px"><div style="color: #5A6575; font-weight: 500">Overtime balance</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3">+46 h</div><div style="color: #3C4757">to date · 12 people</div></div>
+      <div style="border: 1px solid #F5D3BF; border-radius: 16px; padding: 10px 14px; background: #FFF7F2"><div style="color: #7C2D12; font-weight: 500">Projects near budget</div><div style="font-size: 22px; font-weight: 700; line-height: 1.3; color: #9A3412">2</div><div style="color: #7C2D12">ERP-MIG, CRM-REL</div></div>
+    </section>
+
+    <section style="border: 1px solid #E3E7ED; border-radius: 18px; padding: 14px 13px 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 7px">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Hours per week</h2>
+        <div aria-hidden="true" style="display: flex; gap: 14px; color: #3C4757">
+          <span style="display: inline-flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #0F6B67"></span>Worked</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #93B4F5; box-shadow: inset 0 0 0 1px #3E63B0"></span>Booked</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><span style="width: 14px; border-top: 2px dashed #17212F"></span>Target</span>
+        </div>
+      </div>
+      <svg role="img" aria-label="Hours per week, October 2026. Week 40: worked 172, booked 152, target 192. Week 41: 452, 400, target 480. Week 42: 418, 371, target 432. Week 43: 446, 394, target 480. Week 44: 324, 285, target 320." width="100%" viewBox="0 0 698 198" style="display: block; margin-top: 6px; font-family: Inter, Arial, sans-serif">
+        <g stroke="#E3E7ED" stroke-width="1"><line x1="36" y1="16" x2="698" y2="16"></line><line x1="36" y1="44.8" x2="698" y2="44.8"></line><line x1="36" y1="73.6" x2="698" y2="73.6"></line><line x1="36" y1="102.4" x2="698" y2="102.4"></line><line x1="36" y1="131.2" x2="698" y2="131.2"></line></g>
+        <line x1="36" y1="160" x2="698" y2="160" stroke="#5A6575" stroke-width="1"></line>
+        <g fill="#5A6575" font-size="12" text-anchor="end"><text x="30" y="20">500</text><text x="30" y="48.8">400</text><text x="30" y="77.6">300</text><text x="30" y="106.4">200</text><text x="30" y="135.2">100</text><text x="30" y="164">0</text></g>
+        <g fill="#0F6B67"><rect x="66.2" y="110.5" width="34" height="49.5" rx="4"></rect><rect x="198.6" y="29.8" width="34" height="130.2" rx="4"></rect><rect x="331" y="39.6" width="34" height="120.4" rx="4"></rect><rect x="463.4" y="31.6" width="34" height="128.4" rx="4"></rect><rect x="595.8" y="66.7" width="34" height="93.3" rx="4"></rect></g>
+        <g fill="#93B4F5" stroke="#3E63B0" stroke-width="1"><rect x="104.7" y="116.7" width="33" height="42.8" rx="4"></rect><rect x="237.1" y="45.3" width="33" height="114.2" rx="4"></rect><rect x="369.5" y="53.7" width="33" height="105.8" rx="4"></rect><rect x="501.9" y="47" width="33" height="112.5" rx="4"></rect><rect x="634.3" y="78.4" width="33" height="81.1" rx="4"></rect></g>
+        <g fill="#FFFFFF" font-size="12" font-weight="600" text-anchor="middle"><text x="83.2" y="125">172</text><text x="215.6" y="44">452</text><text x="348" y="54">418</text><text x="480.4" y="46">446</text><text x="612.8" y="81">324</text></g>
+        <g fill="#17212F" font-size="12" font-weight="600" text-anchor="middle"><text x="121.2" y="131">152</text><text x="253.6" y="60">400</text><text x="386" y="68">371</text><text x="518.4" y="61">394</text><text x="650.8" y="93">285</text></g>
+        <g stroke="#17212F" stroke-width="2" stroke-dasharray="5 3"><line x1="58" y1="104.7" x2="146" y2="104.7"></line><line x1="190.6" y1="21.8" x2="278.6" y2="21.8"></line><line x1="323" y1="35.6" x2="411" y2="35.6"></line><line x1="455.4" y1="21.8" x2="543.4" y2="21.8"></line><line x1="587.8" y1="67.8" x2="675.8" y2="67.8"></line></g>
+        <g font-size="12" text-anchor="middle"><text x="102.2" y="178" fill="#17212F" font-weight="600">Week 40</text><text x="234.6" y="178" fill="#17212F" font-weight="600">Week 41</text><text x="367" y="178" fill="#17212F" font-weight="600">Week 42</text><text x="499.4" y="178" fill="#17212F" font-weight="600">Week 43</text><text x="631.8" y="178" fill="#17212F" font-weight="600">Week 44</text></g>
+        <g font-size="12" text-anchor="middle" fill="#5A6575"><text x="102.2" y="194">1 – 4 Oct</text><text x="234.6" y="194">5 – 11 Oct</text><text x="367" y="194">12 – 18 Oct</text><text x="499.4" y="194">19 – 25 Oct</text><text x="631.8" y="194">26 – 31 Oct</text></g>
+      </svg>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+      <section style="border: 1px solid #E3E7ED; border-radius: 18px; padding: 14px 20px">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Hours by project</h2>
+        <div role="table" aria-label="Hours booked by project, 1,602 h in total" style="margin-top: 8px">
+          <sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+            <div role="row" style="display: grid; grid-template-columns: 112px minmax(0, 1fr) 46px; column-gap: 8px; height: 21px; align-items: center">
+              <span role="rowheader" style="display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 4px; flex: none; background: {{p.color}}"></span><strong style="font-weight: 600">{{p.code}}</strong></span>
+              <span role="cell" aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E6ECEF; overflow: hidden"><span style="display: block; height: 8px; border-radius: 4px; width: {{p.bar}}; background: {{p.color}}"></span></span>
+              <span role="cell" style="text-align: right; font-weight: 600">{{p.h}}</span>
+            </div>
+          </sc-for>
+          <div role="row" style="display: grid; grid-template-columns: 112px minmax(0, 1fr) 46px; column-gap: 8px; height: 24px; align-items: center; border-top: 1px solid #E3E7ED; margin-top: 2px; font-weight: 700">
+            <span role="rowheader">Total booked</span><span role="cell"></span><span role="cell" style="text-align: right">1,602 h</span>
+          </div>
+        </div>
+      </section>
+      <section style="border: 1px solid #E3E7ED; border-radius: 18px; padding: 14px 20px">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Completeness by team</h2>
+        <div role="table" aria-label="Completeness by team" style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{teams}}" as="t" hint-placeholder-count="4">
+            <div role="row" style="display: flex; flex-direction: column; gap: 4px">
+              <div style="display: flex; justify-content: space-between"><span role="rowheader" style="font-weight: 600">{{t.name}}</span><span role="cell" style="font-weight: 600; color: {{t.ink}}">{{t.label}}</span></div>
+              <span aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E6ECEF; overflow: hidden"><span style="display: block; height: 8px; border-radius: 4px; width: {{t.pct}}; background: {{t.bar}}"></span></span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <section style="border: 1px solid #E3E7ED; border-radius: 18px; padding: 14px 20px 6px">
+      <h2 style="margin: 0; font-size: 15px; font-weight: 600">Project budgets <span style="font-weight: 400; color: #5A6575; font-size: 12px">· total since project start</span></h2>
+      <div role="table" aria-label="Project budgets" style="margin-top: 6px">
+        <div role="row" style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 110px 150px; column-gap: 14px; height: 26px; align-items: center; border-bottom: 1px solid #E3E7ED; font-weight: 600; color: #5A6575">
+          <span role="columnheader">Project</span><span role="columnheader">Used</span><span role="columnheader" style="text-align: right">Hours used / planned</span><span role="columnheader">Status</span>
+        </div>
+        <sc-for list="{{budgets}}" as="b" hint-placeholder-count="4">
+          <div role="row" style="display: grid; grid-template-columns: 200px minmax(0, 1fr) 110px 150px; column-gap: 14px; height: 30px; align-items: center; border-bottom: 1px solid #E3E7ED">
+            <span role="rowheader" style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 4px; background: {{b.color}}"></span><strong style="font-weight: 600">{{b.code}}</strong> <span style="color: #3C4757">{{b.name}}</span></span>
+            <span role="cell" aria-hidden="true" style="height: 8px; border-radius: 4px; background: #E6ECEF; overflow: hidden"><span style="display: block; height: 8px; border-radius: 4px; width: {{b.pct}}; background: {{b.bar}}"></span></span>
+            <span role="cell" style="text-align: right">{{b.hours}}</span>
+            <span role="cell">
+              <sc-if value="{{b.isWarn}}" hint-placeholder-val="{{ true }}"><span style="display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 9px; border-radius: 10px; background: #FFF7F2; box-shadow: inset 0 0 0 1px #F5D3BF; color: #7C2D12; font-weight: 600"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20z"></path><path d="M12 10v5M12 18v.01"></path></svg>{{b.status}}</span></sc-if>
+              <sc-if value="{{b.isOk}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 9px; border-radius: 10px; background: #E3F4EA; box-shadow: inset 0 0 0 1px #BFE3CB; color: #166534; font-weight: 600"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17l9-10"></path></svg>{{b.status}}</span></sc-if>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+
+  <footer style="position: absolute; left: 40px; right: 40px; bottom: 30px; display: flex; justify-content: space-between; gap: 16px; padding-top: 8px; border-top: 1px solid #E3E7ED; color: #5A6575">
+    <span style="font-weight: 600; color: #3C4757">Sums only – no person shown</span>
+    <span>Generated 3 Nov 2026, 09:14 · Time Tracking</span>
+    <span>Page 1 of 1</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":794,"height":1123}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const hatch = 'repeating-linear-gradient(135deg, #9A3412 0 3px, #F5C9B3 3px 6px)';
+    const warn = { bar: hatch, isWarn: true, isOk: false };
+    const ok = { bar: '#0F6B67', isWarn: false, isOk: true };
+    const team = (name, p) => p < 90
+      ? { name: name, pct: p + '%', label: p + ' % · below 90 %', bar: hatch, ink: '#9A3412' }
+      : { name: name, pct: p + '%', label: p + ' %', bar: '#0F6B67', ink: '#17212F' };
+    return {
+      projects: [['CRM-REL', 528, '#2563EB'], ['ERP-MIG', 384, '#7C3AED'], ['PORTAL', 262, '#0F766E'], ['INTERNAL-TOOLS', 214, '#B45309'], ['SALES-KIT', 118, '#2563EB'], ['Other', 96, '#7A8494']]
+        .map((r) => ({ code: r[0], h: r[1] + ' h', color: r[2], bar: Math.round(r[1] / 528 * 100) + '%' })),
+      teams: [team('Engineering', 97), team('Backoffice', 96), team('Consulting', 91), team('Sales', 84)],
+      budgets: [
+        Object.assign({ code: 'ERP-MIG', name: 'ERP Migration', color: '#7C3AED', pct: '93%', hours: '1,488 / 1,600', status: '93 % · over 80 %' }, warn),
+        Object.assign({ code: 'CRM-REL', name: 'CRM Relaunch', color: '#2563EB', pct: '86%', hours: '2,064 / 2,400', status: '86 % · over 80 %' }, warn),
+        Object.assign({ code: 'PORTAL', name: 'Customer Portal', color: '#0F766E', pct: '47%', hours: '940 / 2,000', status: '47 % · on track' }, ok),
+        Object.assign({ code: 'SALES-KIT', name: 'Sales Kit', color: '#2563EB', pct: '41%', hours: '330 / 800', status: '41 % · on track' }, ok)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

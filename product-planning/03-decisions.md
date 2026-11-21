@@ -1,6 +1,6 @@
 # 3. Decision Log
 
-Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 – D-17 on 2026-11-21 after the UX review of the first implementation cycle; mockup consistency decisions D-18 – D-21 on 2026-11-21). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
+Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 – D-17 on 2026-11-21 after the UX review of the first implementation cycle; mockup consistency decisions D-18 – D-21 on 2026-11-21; PDF layout D-22 on 2026-11-21). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
 
 | ID | Topic | Decision | Recommended was |
 |----|-------|----------|-----------------|
@@ -26,6 +26,7 @@ Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 
 | D-19 | Dashboard export | **CSV, Excel and PDF** on the dashboard as well (amends F-05) | Drop PDF |
 | D-20 | Overtime tile | **Cumulative balance** (incl. carry-over), independent of the period filter, labelled as such | ✔ same |
 | D-21 | Dashboard thresholds | **Teams below 90 % completeness get the warning colour (fixed); budgets at 100 % or more get an "over budget" error chip** | ✔ same |
+| D-22 | PDF layout | **Layout B "Report" for every generated PDF** – the app's light look on A4, tagged PDF/UA, readable in greyscale ([06-ux-design.md §6.9](06-ux-design.md#69-generated-pdfs-binding-for-every-pdf)) | – (two options presented) |
 
 ---
 
@@ -136,6 +137,26 @@ The "Overtime balance" tile shows the total balance including the opening balanc
 ## D-21 – Dashboard thresholds → **90 % completeness, over-budget chip**
 
 In "Completeness by team" a team below 90 % gets the warning colour (fixed value, not configurable in the MVP). Project budgets show "on track" below 80 %, the warning chip from 80 %, and a distinct "over budget" error chip (text plus icon) from 100 %.
+
+## D-22 – PDF layout → **Layout B "Report" for every PDF**
+
+**Background:** the application generates PDFs for the user report (incl. the monthly working-time record), the project report, the dashboard and management overview (D-19) and other exports (F-05, H-03). Without a common layout, each PDF would get its own one-off design, which repeats the cycle 1 failure (§6.1) on paper.
+
+**Options (mockups on the PDF canvas, §6.9.6):**
+- **A · Ledger:** a formal document. Lines instead of boxes, very little colour, the donut replaced by a list.
+- **B · Report:** continues the app's light look. Header band in the accent tint, figure tiles, cards, status chips, charts as on the dashboard.
+
+**Decision:** B, for **every** generated PDF. A PDF looks like it comes from the same product as the screen it was exported from.
+
+**Consequences:**
+- [06-ux-design.md §6.9](06-ux-design.md#69-generated-pdfs-binding-for-every-pdf) defines page, structure, charts and accessibility for all PDFs. One shared PDF template is built in step 14; no PDF gets its own design.
+- **Readable in greyscale.** Colours that differ in hue only become the same grey on paper, so:
+  - PDFs use no donut, no stacked bar and no legend matched by colour
+  - every coloured mark is labelled directly
+  - warning bars are hatched
+  - booked bars get an outline
+- **Accessible:** PDFs are tagged PDF/UA-1 with language, title, headings, real tables and chart alternative texts. Checked per template with a PDF/UA validator and a greyscale print.
+- PDFs always use the light tokens, whatever theme the user has chosen.
 
 ---
 
