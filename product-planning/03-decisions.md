@@ -1,6 +1,6 @@
 # 3. Decision Log
 
-Status: **all decisions taken** (2026-11-20). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
+Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 – D-17 on 2026-11-21 after the UX review of the first implementation cycle). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
 
 | ID | Topic | Decision | Recommended was |
 |----|-------|----------|-----------------|
@@ -17,6 +17,11 @@ Status: **all decisions taken** (2026-11-20). The original options and reasoning
 | D-10 | Visibility of per-person data | **Employee + backoffice; project leads for their own projects; management aggregated only** ⚠ | ✔ same |
 | D-11 | Data retention | **Keep forever**, no automatic deletion ⚠ | Decide with DPO |
 | D-12 | UI language | **German + English** | – |
+| D-13 | UX design | **Approved design is binding** for every screen ([06-ux-design.md](06-ux-design.md) + mockups) | – |
+| D-14 | Theme | **Light, dark and high contrast; user chooses System / Light / Dark** in personal settings | ✔ same |
+| D-15 | Navigation and start page | **Grouped side menu per role; "Today" is the employee start page** | ✔ same |
+| D-16 | Global search | **Not built** (mockup shows it, no use case) | ✔ same |
+| D-17 | Day / week / month views | **Day and Week pages only**; month lives in Balance & summary | ✔ same |
 
 ---
 
@@ -85,6 +90,32 @@ No automatic deletion; H-04 dropped.
 ## D-12 – UI language → **German + English**
 
 Both languages from the start; each user chooses their language in personal settings (A-07).
+
+## D-13 – UX design → **Approved design is binding**
+
+**Background:** the first implementation cycle delivered all features, but the UX review was devastating: a flat link toolbar, a start page with one sentence, six forms stacked on the recording page, plain input grids, raw ISO dates and no visual hierarchy (details in [06-ux-design.md §6.1](06-ux-design.md#61-why-this-document-exists-lessons-from-the-first-implementation-cycle)). A design with mockups was then made and approved by the product owner (2026-11-21).
+
+**Consequences:**
+- [06-ux-design.md](06-ux-design.md) and its mockups (light and dark) are the target for every screen; the Definition of Done includes a design check (§5.2).
+- The shell, theme and shared building blocks are built in step 1, before any feature screen.
+- Mockup elements without a feature are not built (D-16, D-17); decisions D-01 – D-12 and accessibility win over the mockups where they conflict.
+- The dashboard's team filter and "Completeness by team" are already MVP scope (U-06, F-04, F-06) and are built.
+
+## D-14 – Theme → **System / Light / Dark, stored with the personal settings**
+
+Light and dark theme from the start, plus a high-contrast variant and support for forced colours (I-07). The default follows the operating system; the user can override it with a switch in the top bar and a three-way choice (System / Light / Dark) in personal settings. The choice is stored with the user's settings like the language (A-07), so it follows the user to every device and survives a new login.
+
+## D-15 – Navigation and start page → **Grouped side menu, "Today" start page**
+
+Navigation is a side menu with the groups My time, Insights, Company, Administration and a bottom group (Help & guide, Settings), filtered per role (D-10). Administration has four entries (People, Projects, Month end, System & audit), each with tabs. Employees land on **Today** (I-08), which bundles the running day, project timer, timeline, quick booking and things to check. On smaller windows the side menu becomes a rail or a drawer.
+
+## D-16 – Global search → **Not built**
+
+The mockups show a search field in the top bar, but no feature needs it. It is left out; the top bar keeps space for it (I-09).
+
+## D-17 – Day / week / month views → **Day and Week only**
+
+The recording area has a Day page (any date) and a Week page, switched with a Day | Week control. The month view is part of Balance & summary (B-13); there is no separate month page.
 
 ---
 

@@ -20,6 +20,7 @@ Employees record their daily working time (start, end, breaks) and allocate it t
 | G3 | Backoffice gets a dashboard with an overview plus per-user, per-team and per-project reports, exportable for further use (e.g. controlling, payroll). |
 | G4 | Recorded data is trustworthy: complete, traceable, and protected from silent changes after it has been checked. |
 | G5 | The solution covers the legal working-time recording duty (start, end, breaks, overtime balance) – decision D-01. |
+| G6 | The application looks and feels like a finished, modern product, not a set of forms: it follows the approved UX design in light and dark theme ([06-ux-design.md](06-ux-design.md), D-13). |
 
 ## 1.4 Non-goals (deliberately not part of this product)
 
@@ -59,10 +60,10 @@ A user can hold more than one role (e.g. a project lead is also an employee).
 ## 1.7 Core user journeys
 
 **J1 – Employee records a day**
-Starts work with the timer (or enters start/end later) → records breaks → allocates the day to projects and activities → sees daily total, target and overtime balance. Rule warnings appear for e.g. missing breaks.
+Lands on **Today** → starts the work day in the running-day panel (or later records start/end in the "Record a working day" dialog on the Day page) → takes breaks → runs the project timer or books via quick booking (duration pre-filled with the unbooked time) → sees worked time, target, expected end and overtime balance on the same page. Rule warnings appear under "Things to check", e.g. for missing breaks.
 
 **J2 – Employee reviews the week**
-Opens the week view → system hints at gaps (day without entries, project time ≠ working time) → fills gaps, marks absences.
+Opens **Week** (from the side menu or "Open week" on Today) → day status in the timesheet and "Things to check" show gaps (day without entries, project time ≠ working time) → fills cells directly or copies last week / the previous day → marks absences.
 
 **J3 – Backoffice onboards a new employee**
 Creates the user (name, email, role, team, target hours, federal state, start date, opening overtime balance) → assigns projects → user receives an invitation and sets a password.
@@ -71,7 +72,7 @@ Creates the user (name, email, role, team, target hours, federal state, start da
 Creates project (name, code, project lead, optional hour budget) → assigns members or marks it open to everyone → project appears in selection lists.
 
 **J5 – Backoffice checks the month**
-Opens the dashboard → checks the completeness report → resolves gaps with employees → creates payroll export → locks the month.
+Opens the dashboard (completeness tile, completeness by team) → checks the completeness report → resolves gaps with employees → creates payroll export → locks the month (all under Administration › Month end).
 
 **J6 – Employee leaves the company**
 Backoffice deactivates the user → login disabled, historic data stays in reports.

@@ -7,13 +7,15 @@ The phases follow the decisions in [03-decisions.md](03-decisions.md) and the pr
 > **Note on MVP size:** recording legal working time from the start (D-01), together with overtime, absences, budgets and the full set of reports, makes the MVP considerably larger than a pure project-time tool. The MVP is therefore split into two increments (1a, 1b). Go-live should happen after 1b, but 1a can be piloted with a small group of users.
 
 ### Phase 0 – Preparation (before development)
+- Make the approved UX design and mockups ([06-ux-design.md](06-ux-design.md)) available to the whole team (the mockup canvas is private until shared).
 - Clarify with HR: handling of employees exempt from working-time rules; break and rest-period rules to check (H-06).
 - Agree the payroll export format (F-13) with payroll.
 - Collect initial data: users with target hours, teams, federal states, opening overtime balances, projects, activity list.
 
 ### Phase 1a – Core recording (pilot)
 Goal: employees record working time and project time; backoffice administers.
-- **Account:** login, invitation, password reset, logout/timeout, roles, deactivation, personal settings incl. language (A-01–A-05, A-07, A-08).
+- **Look and feel:** the approved application shell (grouped side menu, top bar), light/dark/high-contrast theme with user choice, shared building blocks, Today start page (I-07, I-08, D-13 – D-15).
+- **Account:** login, invitation, password reset, logout/timeout, roles, deactivation, personal settings incl. language and theme (A-01–A-05, A-07, A-08).
 - **Recording:** working-time recording with start/end/breaks, timer, manual entry, day and week view, edit/delete, assigned + open projects, activities, copy last week, favourites (B-01–B-05, B-07–B-10, B-12, B-16, B-18).
 - **Administration:** users, roles, teams, project assignments, bulk import; projects, status, members, activity list, internal default projects (U-01–U-03, U-05, U-06, U-08, E-01, E-02, E-04, E-06, E-09).
 - **Trust:** change history, admin log, visibility rules (H-01, H-02, H-05).
@@ -24,7 +26,7 @@ Goal: correct overtime balances, month-end close and reporting.
 - **Balances:** target hours, opening balance, public holidays, absence marker, own summaries, gap hints, working-time rule checks (U-04, U-10, I-04, B-13–B-15, H-06).
 - **Closing:** period locking, admin corrections (C-01, C-05).
 - **Budgets:** hour budgets with warnings (E-07, G-03).
-- **Reports:** dashboard, management view, project and user reports, free filtering/grouping, completeness, budget and overtime reports, project lead view, CSV/Excel/PDF export, payroll export (F-01–F-07, F-09, F-12–F-14).
+- **Reports:** dashboard and management view in the approved design (charts, figure tiles, budget table, completeness by team), project and user reports, free filtering/grouping, completeness, budget and overtime reports, project lead view, CSV/Excel/PDF export, payroll export (F-01–F-07, F-09, F-12–F-14).
 - **Data protection:** own data view and export (H-03).
 - **Help:** user guide DE/EN (I-05).
 
@@ -36,7 +38,7 @@ Goal: correct overtime balances, month-end close and reporting.
 - Email reminders for missing time (G-01).
 
 ### Not planned
-Approval workflow, clients and billing, money values, utilization ranking, scheduled reports, chat integrations, external integrations, automatic data deletion (see "Out of scope" in the catalog).
+Approval workflow, clients and billing, money values, utilization ranking, scheduled reports, chat integrations, external integrations, automatic data deletion, global search (see "Out of scope" in the catalog).
 
 ### Accepted risks
 The risks R-01 – R-05 (retention, late recording, no second login factor, works council/privacy, open legal status) are accepted for the MVP and not mitigated in it. See the risk register in [03-decisions.md](03-decisions.md#accepted-risks-mvp); review them before extending the MVP.
@@ -51,12 +53,21 @@ The risks R-01 – R-05 (retention, late recording, no second login factor, work
 | Month-end close | Backoffice closes a month (completeness check, payroll export, lock) in < 1 hour. |
 | Reports | Project, user, team and budget reports available without manual spreadsheet work. |
 | Data trust | Every change to an entry is traceable to a person and time. |
+| UX | The product owner confirms that Today, Week and Dashboard match the approved mockups in light and dark theme, and every other screen follows [06-ux-design.md](06-ux-design.md). No automated accessibility violations in any theme variant. |
 
 ## 4.3 Hand-off notes for the technical team
 
 Points that follow from the feature analysis (the *how* is up to the technical team):
 
 - **Fixed stack:** Spring Boot backend, Angular frontend.
+- **UX design is binding** (D-13): [06-ux-design.md](06-ux-design.md) and the mockups define layout, screens, tokens and accessibility. Points for the specification:
+  - the design needs colour tokens beyond a component library's standard roles (warning, success, chart/project series, the always-dark hero panel); define them once next to the theme, and let screens use tokens only
+  - font Inter and the icon set are served by the application itself (no external font service)
+  - theme preference (System / Light / Dark) is stored with the user settings, like the language (D-14)
+  - five simple chart forms (ring, grouped bars, donut, stacked bar, day timeline) – a large chart library is not needed
+  - Today combines several data sets (running day, project timer, day view, week summary, findings); load them as a fixed number of requests, never per entry
+  - automated accessibility checks in light, dark, high contrast and forced colours, on phone and desktop window sizes
+  - dates, times and numbers are always formatted per language; implausible figures (e.g. a balance of −57606:52 seen in cycle 1) are a bug, not a display case
 - **Scale:** ~100 users, single company, low data volume – favour simplicity.
 - **Authentication:** own user accounts with passwords (D-02): invitation, reset, lockout; no 2FA in the MVP (R-03).
 - **Two kinds of time:** legal working time (start/end/breaks per day) and project time (allocated to project + activity). Their relationship (must project time add up to working time? warning only?) must be specified – current assumption: mismatch is shown as a hint (B-14), not blocked.

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Concept C: Command, backoffice dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1E4FD8}a:hover{color:#173DA8}
+</style>
+</helmet>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #121A26; background: #F2F4F8; min-height: 1180px; position: relative">
+
+  <!-- Brand header with grouped navigation -->
+  <header style="background: #0E1A2B; color: #FFFFFF">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 0 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; min-height: 64px">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="{{accent}}"></rect><path d="M16 8v8l5 3" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" fill="none"></path><circle cx="16" cy="16" r="9.5" stroke="#FFFFFF" stroke-width="2.6" fill="none"></circle></svg>
+        <span style="font-weight: 800; font-size: 17px; letter-spacing: -0.01em">Time Tracking</span>
+      </div>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; margin-right: auto">
+        <a href="#" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 10px; color: #C8D2E1; font-size: 14px; font-weight: 600; text-decoration: none">My time<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></a>
+        <a href="#" aria-current="page" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; background: rgba(255,255,255,0.12); color: #FFFFFF; font-size: 14px; font-weight: 700; text-decoration: none">Dashboard</a>
+        <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; color: #C8D2E1; font-size: 14px; font-weight: 600; text-decoration: none">Reports</a>
+        <a href="#" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; color: #C8D2E1; font-size: 14px; font-weight: 600; text-decoration: none">Budgets</a>
+        <a href="#" aria-expanded="{{menuExpanded}}" style="display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 10px; color: #FFFFFF; font-size: 14px; font-weight: 600; text-decoration: none; background: {{adminBg}}">Administration<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></a>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div role="group" aria-label="Language" style="display: flex; border: 1px solid #33445E; border-radius: 10px; overflow: hidden">
+          <button type="button" aria-pressed="true" style="height: 36px; padding: 0 10px; border: 0; background: #FFFFFF; color: #0E1A2B; font: 700 12px Manrope, sans-serif">EN</button>
+          <button type="button" aria-pressed="false" style="height: 36px; padding: 0 10px; border: 0; background: transparent; color: #FFFFFF; font: 700 12px Manrope, sans-serif">DE</button>
+        </div>
+        <button type="button" aria-label="Notifications: 2 budget warnings" style="position: relative; width: 44px; height: 44px; border-radius: 22px; border: 0; background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"></path><path d="M10 21h4"></path></svg><span style="position: absolute; top: 8px; right: 8px; width: 9px; height: 9px; border-radius: 5px; background: #FB923C; border: 2px solid #0E1A2B"></span></button>
+        <button type="button" aria-label="Account: Admin Backoffice" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 4px; border-radius: 22px; border: 1px solid #33445E; background: transparent; color: #FFFFFF; font: 600 13px Manrope, sans-serif"><span style="width: 34px; height: 34px; border-radius: 17px; background: #DCE6FB; color: #173DA8; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center">AB</span>Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mega menu (Administration), toggled by the "Show admin menu" tweak -->
+  <sc-if value="{{showMenu}}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; top: 70px; right: max(32px, calc((100% - 1320px) / 2 + 200px)); z-index: 5; width: min(760px, calc(100% - 64px)); background: #FFFFFF; border-radius: 16px; box-shadow: 0 18px 48px rgba(14,26,43,0.22), 0 2px 6px rgba(14,26,43,0.08); padding: 24px; box-sizing: border-box; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #566275; padding-bottom: 6px">People</span>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Users</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Teams</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Target working time</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Import (CSV)</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #566275; padding-bottom: 6px">Projects</span>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Projects</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Activities</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Planned hours</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #566275; padding-bottom: 6px">Month end</span>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Close months</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Corrections</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Payroll export</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Holidays</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; background: #F5F7FA; border-radius: 12px; padding: 12px 14px; margin: -8px -4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #566275; padding-bottom: 6px">System</span>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Audit log</a>
+        <a href="#" style="padding: 8px 0; color: #121A26; font-size: 14px; font-weight: 600; text-decoration: none">Test e-mail</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <main style="max-width: 1320px; margin: 0 auto; padding: 24px 32px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+
+    <!-- Page header -->
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-right: auto">
+        <nav aria-label="Breadcrumb" style="font-size: 13px; color: #566275"><a href="#" style="color: #566275; text-decoration: none">Home</a> / <span aria-current="page">Dashboard</span></nav>
+        <h1 style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.02em">Company overview</h1>
+        <p style="margin: 0; font-size: 14px; color: #4A5568">Sums only, no individual person is shown.</p>
+      </div>
+      <button type="button" style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #D3D9E3; background: #FFFFFF; font: 600 14px Manrope, sans-serif; color: #121A26; display: inline-flex; align-items: center; gap: 10px">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>1 – 20 Nov 2026<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></button>
+      <button type="button" style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #D3D9E3; background: #FFFFFF; font: 600 14px Manrope, sans-serif; color: #121A26; display: inline-flex; align-items: center; gap: 10px">All teams<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg></button>
+      <button type="button" style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: {{accent}}; font: 700 14px Manrope, sans-serif; color: #FFFFFF; display: inline-flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Export</button>
+    </div>
+
+    <!-- KPI row -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <span style="font-size: 13px; font-weight: 600; color: #4A5568">Worked</span>
+        <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.02em">1,286 h</span>
+        <span style="font-size: 13px; color: #4A5568">of 1,440 h target</span>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <span style="font-size: 13px; font-weight: 600; color: #4A5568">Booked on projects</span>
+        <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.02em">1,198 h</span>
+        <span style="font-size: 13px; color: #4A5568"><span style="font-weight: 700; color: #121A26">93 %</span> of worked time</span>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <span style="font-size: 13px; font-weight: 600; color: #4A5568">Completeness</span>
+        <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.02em">94 %</span>
+        <span style="font-size: 13px; color: #9A3412; font-weight: 600">11 days without any time</span>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <span style="font-size: 13px; font-weight: 600; color: #4A5568">Overtime balance (company)</span>
+        <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.02em">+46 h</span>
+        <span style="font-size: 13px; color: #4A5568">across 12 people</span>
+      </div>
+      <div style="background: #FFF4EB; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #FBD5B5">
+        <span style="font-size: 13px; font-weight: 700; color: #7C2D12">Projects near budget</span>
+        <span style="font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: #7C2D12">2</span>
+        <a href="#" style="font-size: 13px; font-weight: 700; color: #9A3412">Review budgets</a>
+      </div>
+    </div>
+
+    <!-- Charts row -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px">
+      <section aria-labelledby="wk-h" style="grid-column: span 2; background: #FFFFFF; border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px">
+          <h2 id="wk-h" style="margin: 0; font-size: 16px; font-weight: 800; margin-right: auto">Hours per week</h2>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #4A5568"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{accent}}"></span>Worked</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #4A5568"><span style="width: 10px; height: 10px; border-radius: 3px; background: #93B4F5"></span>Booked</span>
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #4A5568"><span style="width: 14px; height: 0; border-top: 2px dashed #566275"></span>Target</span>
+        </div>
+        <svg role="img" aria-label="Hours per week. Week 45: 452 worked, 420 booked. Week 46: 447 worked, 415 booked. Week 47: 387 worked, 363 booked so far. Target 480 per week." viewBox="0 0 640 250" style="width: 100%; height: auto">
+          <g font-family="Manrope, sans-serif" font-size="12" fill="#566275">
+            <line x1="48" y1="220" x2="630" y2="220" stroke="#D3D9E3"></line>
+            <line x1="48" y1="140" x2="630" y2="140" stroke="#EEF1F5"></line>
+            <line x1="48" y1="60" x2="630" y2="60" stroke="#EEF1F5"></line>
+            <text x="38" y="224" text-anchor="end">0</text>
+            <text x="38" y="144" text-anchor="end">200</text>
+            <text x="38" y="64" text-anchor="end">400</text>
+            <line x1="48" y1="28" x2="630" y2="28" stroke="#566275" stroke-width="1.5" stroke-dasharray="5 4"></line>
+            <text x="630" y="20" text-anchor="end">480 h target</text>
+            <rect x="110" y="39" width="56" height="181" rx="6" fill="{{accent}}"></rect>
+            <rect x="172" y="52" width="56" height="168" rx="6" fill="#93B4F5"></rect>
+            <text x="138" y="33" text-anchor="middle" fill="#121A26" font-weight="700">452</text>
+            <text x="200" y="46" text-anchor="middle" fill="#121A26" font-weight="700">420</text>
+            <text x="169" y="242" text-anchor="middle">Week 45</text>
+            <rect x="290" y="41" width="56" height="179" rx="6" fill="{{accent}}"></rect>
+            <rect x="352" y="54" width="56" height="166" rx="6" fill="#93B4F5"></rect>
+            <text x="318" y="35" text-anchor="middle" fill="#121A26" font-weight="700">447</text>
+            <text x="380" y="48" text-anchor="middle" fill="#121A26" font-weight="700">415</text>
+            <text x="349" y="242" text-anchor="middle">Week 46</text>
+            <rect x="470" y="65" width="56" height="155" rx="6" fill="{{accent}}"></rect>
+            <rect x="532" y="75" width="56" height="145" rx="6" fill="#93B4F5"></rect>
+            <text x="498" y="59" text-anchor="middle" fill="#121A26" font-weight="700">387</text>
+            <text x="560" y="69" text-anchor="middle" fill="#121A26" font-weight="700">363</text>
+            <text x="529" y="242" text-anchor="middle">Week 47 (running)</text>
+          </g>
+        </svg>
+      </section>
+
+      <section aria-labelledby="pj-h" style="background: #FFFFFF; border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <h2 id="pj-h" style="margin: 0; font-size: 16px; font-weight: 800">Hours by project</h2>
+        <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
+          <svg role="img" aria-label="Booked hours by project, total 1,198" width="150" height="150" viewBox="0 0 150 150">
+            <g transform="rotate(-90 75 75)" fill="none" stroke-width="22">
+              <circle cx="75" cy="75" r="60" stroke="#1E3A8A" stroke-dasharray="129.7 377"></circle>
+              <circle cx="75" cy="75" r="60" stroke="#3B82F6" stroke-dasharray="93.2 377" stroke-dashoffset="-129.7"></circle>
+              <circle cx="75" cy="75" r="60" stroke="#0D9488" stroke-dasharray="59.2 377" stroke-dashoffset="-222.9"></circle>
+              <circle cx="75" cy="75" r="60" stroke="#EA8A3A" stroke-dasharray="48.5 377" stroke-dashoffset="-282.1"></circle>
+              <circle cx="75" cy="75" r="60" stroke="#A855F7" stroke-dasharray="25.8 377" stroke-dashoffset="-330.6"></circle>
+              <circle cx="75" cy="75" r="60" stroke="#CBD2DC" stroke-dasharray="20.8 377" stroke-dashoffset="-356.4"></circle>
+            </g>
+            <text x="75" y="73" text-anchor="middle" font-family="Manrope, sans-serif" font-size="22" font-weight="800" fill="#121A26">1,198</text>
+            <text x="75" y="92" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" fill="#566275">hours booked</text>
+          </svg>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13px; flex: 1 1 140px">
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #1E3A8A"></span><span style="margin-right: auto; font-weight: 600">CRM-REL</span>412 h</li>
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #3B82F6"></span><span style="margin-right: auto; font-weight: 600">ERP-MIG</span>296 h</li>
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #0D9488"></span><span style="margin-right: auto; font-weight: 600">PORTAL</span>188 h</li>
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #EA8A3A"></span><span style="margin-right: auto; font-weight: 600">INTERNAL-TOOLS</span>154 h</li>
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #A855F7"></span><span style="margin-right: auto; font-weight: 600">SALES-KIT</span>82 h</li>
+            <li style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #CBD2DC"></span><span style="margin-right: auto; font-weight: 600">Other</span>66 h</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tables row -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px">
+      <section aria-labelledby="bd-h" style="grid-column: span 2; background: #FFFFFF; border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <h2 id="bd-h" style="margin: 0; font-size: 16px; font-weight: 800; margin-right: auto">Project budgets</h2>
+          <a href="#" style="font-size: 14px; font-weight: 700; text-decoration: none">All budgets</a>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px">
+            <thead>
+              <tr style="text-align: left; font-size: 12px; color: #566275; text-transform: uppercase; letter-spacing: 0.05em">
+                <th scope="col" style="padding: 8px 8px 8px 0; font-weight: 700">Project</th>
+                <th scope="col" style="padding: 8px; font-weight: 700; width: 40%">Used</th>
+                <th scope="col" style="padding: 8px; font-weight: 700; text-align: right">Hours</th>
+                <th scope="col" style="padding: 8px 0 8px 8px; font-weight: 700; text-align: right">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top: 1px solid #EEF1F5">
+                <th scope="row" style="text-align: left; padding: 12px 8px 12px 0; font-weight: 700">ERP-MIG <span style="font-weight: 500; color: #566275">ERP Migration</span></th>
+                <td style="padding: 12px 8px"><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 93%; height: 100%; border-radius: 4px; background: #C2410C"></div></div></td>
+                <td style="padding: 12px 8px; text-align: right; font-variant-numeric: tabular-nums">296 / 320</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><span style="padding: 4px 10px; border-radius: 12px; background: #FDE7DB; color: #9A3412; font-size: 12px; font-weight: 700">93 % · over 80 %</span></td>
+              </tr>
+              <tr style="border-top: 1px solid #EEF1F5">
+                <th scope="row" style="text-align: left; padding: 12px 8px 12px 0; font-weight: 700">CRM-REL <span style="font-weight: 500; color: #566275">CRM Relaunch</span></th>
+                <td style="padding: 12px 8px"><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 86%; height: 100%; border-radius: 4px; background: #C2410C"></div></div></td>
+                <td style="padding: 12px 8px; text-align: right; font-variant-numeric: tabular-nums">412 / 480</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><span style="padding: 4px 10px; border-radius: 12px; background: #FDE7DB; color: #9A3412; font-size: 12px; font-weight: 700">86 % · over 80 %</span></td>
+              </tr>
+              <tr style="border-top: 1px solid #EEF1F5">
+                <th scope="row" style="text-align: left; padding: 12px 8px 12px 0; font-weight: 700">PORTAL <span style="font-weight: 500; color: #566275">Customer Portal</span></th>
+                <td style="padding: 12px 8px"><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 47%; height: 100%; border-radius: 4px; background: {{accent}}"></div></div></td>
+                <td style="padding: 12px 8px; text-align: right; font-variant-numeric: tabular-nums">188 / 400</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><span style="padding: 4px 10px; border-radius: 12px; background: #E3F4EA; color: #166534; font-size: 12px; font-weight: 700">47 % · on track</span></td>
+              </tr>
+              <tr style="border-top: 1px solid #EEF1F5">
+                <th scope="row" style="text-align: left; padding: 12px 8px 12px 0; font-weight: 700">SALES-KIT <span style="font-weight: 500; color: #566275">Sales Kit</span></th>
+                <td style="padding: 12px 8px"><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 41%; height: 100%; border-radius: 4px; background: {{accent}}"></div></div></td>
+                <td style="padding: 12px 8px; text-align: right; font-variant-numeric: tabular-nums">82 / 200</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><span style="padding: 4px 10px; border-radius: 12px; background: #E3F4EA; color: #166534; font-size: 12px; font-weight: 700">41 % · on track</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="tm-h" style="background: #FFFFFF; border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 1px 2px rgba(14,26,43,0.06)">
+        <h2 id="tm-h" style="margin: 0; font-size: 16px; font-weight: 800">Completeness by team</h2>
+        <div style="display: flex; flex-direction: column; gap: 14px; font-size: 14px">
+          <div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-weight: 600">Engineering</span><span style="font-weight: 700">97 %</span></div><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 97%; height: 100%; border-radius: 4px; background: {{accent}}"></div></div></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-weight: 600">Backoffice</span><span style="font-weight: 700">96 %</span></div><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 96%; height: 100%; border-radius: 4px; background: {{accent}}"></div></div></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-weight: 600">Consulting</span><span style="font-weight: 700">91 %</span></div><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 91%; height: 100%; border-radius: 4px; background: {{accent}}"></div></div></div>
+          <div style="display: flex; flex-direction: column; gap: 6px"><div style="display: flex; justify-content: space-between"><span style="font-weight: 600">Sales</span><span style="font-weight: 700; color: #9A3412">84 %</span></div><div style="height: 8px; border-radius: 4px; background: #EEF1F5"><div style="width: 84%; height: 100%; border-radius: 4px; background: #C2410C"></div></div></div>
+        </div>
+        <a href="#" style="margin-top: auto; font-size: 14px; font-weight: 700; text-decoration: none">Open completeness report</a>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1E4FD8","options":["#1E4FD8","#0F6B67","#4338CA","#0E1A2B"]},"showMenu":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const showMenu = this.props.showMenu ?? true;
+    return {
+      accent: this.props.accent ?? '#1E4FD8',
+      showMenu: showMenu,
+      menuExpanded: showMenu ? 'true' : 'false',
+      adminBg: showMenu ? 'rgba(255,255,255,0.12)' : 'transparent'
+    };
+  }
+}
+</script>
+</body>
+</html>

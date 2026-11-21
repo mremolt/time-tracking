@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Concept A: Workspace, Today</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0F5F5C}a:hover{color:#0A4644}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17212F; background: #F3F5F8; min-height: 1010px; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <!-- Sidebar -->
+  <nav aria-label="Main" style="flex: 0 0 248px; background: #FFFFFF; border-right: 1px solid #E3E7ED; padding: 20px 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 8px">
+      <div style="width: 34px; height: 34px; border-radius: 10px; background: {{accent}}; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2"></path><path d="M9 2h6"></path></svg>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-weight: 700; font-size: 16px; letter-spacing: -0.01em">Time Tracking</span>
+        <span style="font-size: 12px; color: #5A6575">[Company name]</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5A6575; padding: 0 12px 6px">My time</span>
+      <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; background: {{accentSoft}}; color: #0B4F4C; font-weight: 600; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"></path></svg>Today</a>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Week</a>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20c2-5 5-8 8-8s6 3 8 8"></path><circle cx="12" cy="6" r="3"></circle></svg>Absences</a>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Balance &amp; summary</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5A6575; padding: 0 12px 6px">Insights</span>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"></path><path d="M9 13h7M9 17h5"></path></svg>Reports</a>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 12h18" opacity="0"></path><path d="M5 19V9l7-5 7 5v10"></path><path d="M9 19v-5h6v5"></path></svg>My data</a>
+    </div>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid #E3E7ED; padding-top: 12px">
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01"></path></svg>Help &amp; guide</a>
+      <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: #2C3646; font-size: 14px; text-decoration: none">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"></path></svg>Settings</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+
+    <!-- Top bar -->
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 32px; background: #FFFFFF; border-bottom: 1px solid #E3E7ED">
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-right: auto">
+        <span style="font-size: 13px; color: #5A6575">Friday, 20 November 2026</span>
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em">Good afternoon, Anna</h1>
+      </div>
+      <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 10px; background: #F3F5F8; border: 1px solid #E3E7ED; color: #5A6575; font-size: 14px; min-width: 220px">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+        <input type="search" placeholder="Search projects, days…" style="border: 0; background: transparent; font: inherit; color: #17212F; outline: none; width: 100%">
+      </label>
+      <div role="group" aria-label="Language" style="display: flex; border: 1px solid #D5DBE3; border-radius: 10px; overflow: hidden; height: 40px">
+        <button type="button" aria-pressed="true" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: #17212F; color: #FFFFFF">EN</button>
+        <button type="button" aria-pressed="false" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: #FFFFFF; color: #2C3646">DE</button>
+      </div>
+      <button type="button" aria-label="Account menu: Anna Employee" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 10px 0 4px; border: 1px solid #E3E7ED; border-radius: 22px; background: #FFFFFF; font: 500 14px Inter, sans-serif; color: #17212F">
+        <span style="width: 36px; height: 36px; border-radius: 18px; background: #DCEBEA; color: #0B4F4C; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center">AE</span>Anna Employee
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+    </header>
+
+    <main style="padding: 28px 32px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1240px; width: 100%; box-sizing: border-box">
+
+      <!-- Hero: running day -->
+      <section aria-labelledby="day-h" style="grid-column: span 2; background: #10302F; color: #FFFFFF; border-radius: 18px; padding: 26px 28px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+          <h2 id="day-h" style="margin: 0; font-size: 15px; font-weight: 600; color: #BFE3DF">Work day running</h2>
+          <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #DDF1EE; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #5EEAD4"></span>Started 08:02 · 1 break (0:30)</span>
+        </div>
+        <div style="display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 64px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">5:47<span style="color: #8CCFC8">:12</span></span>
+            <span style="font-size: 14px; color: #BFE3DF">worked today · target 8:00</span>
+          </div>
+          <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px">
+            <div style="height: 10px; border-radius: 5px; background: rgba(255,255,255,0.14); overflow: hidden"><div style="width: 72%; height: 100%; background: #5EEAD4; border-radius: 5px"></div></div>
+            <span style="font-size: 13px; color: #BFE3DF">2:13 to go · expected end around 16:45</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap">
+          <button type="button" style="height: 44px; padding: 0 20px; border-radius: 22px; border: 0; background: #FFFFFF; color: #10302F; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 5v14M15 5v14"></path></svg>Take a break</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.45); background: transparent; color: #FFFFFF; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>End work day</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; flex-wrap: wrap">
+          <span style="width: 10px; height: 10px; border-radius: 5px; background: #93C5FD"></span>
+          <div style="display: flex; flex-direction: column; margin-right: auto">
+            <span style="font-size: 14px; font-weight: 600">CRM-REL · CRM Relaunch</span>
+            <span style="font-size: 13px; color: #BFE3DF">Project timer · Consulting</span>
+          </div>
+          <span style="font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums">1:24</span>
+          <button type="button" style="height: 40px; padding: 0 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.45); background: transparent; color: #FFFFFF; font: 600 13px Inter, sans-serif">Stop &amp; book</button>
+        </div>
+      </section>
+
+      <!-- Week + balance -->
+      <section aria-labelledby="wk-h" style="background: #FFFFFF; border: 1px solid #E3E7ED; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+        <h2 id="wk-h" style="margin: 0; font-size: 15px; font-weight: 600">This week</h2>
+        <div style="display: flex; align-items: center; gap: 18px">
+          <svg role="img" aria-label="32 of 40 hours worked this week" width="104" height="104" viewBox="0 0 104 104">
+            <circle cx="52" cy="52" r="44" fill="none" stroke="#E6ECEF" stroke-width="12"></circle>
+            <circle cx="52" cy="52" r="44" fill="none" stroke="{{accent}}" stroke-width="12" stroke-linecap="round" stroke-dasharray="221 276" transform="rotate(-90 52 52)"></circle>
+            <text x="52" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#17212F">32:00</text>
+            <text x="52" y="68" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5A6575">of 40:00</text>
+          </svg>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #3C4757">
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{accent}}"></span>Worked 32:00</div>
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: #2563EB"></span>Booked 30:30</div>
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: #C2410C"></span>Not booked 1:30</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; align-items: end; height: 70px">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 44px; border-radius: 6px; background: {{accent}}"></div><span style="font-size: 11px; color: #5A6575">Mo</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 48px; border-radius: 6px; background: {{accent}}"></div><span style="font-size: 11px; color: #5A6575">Tu</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 42px; border-radius: 6px; background: {{accent}}"></div><span style="font-size: 11px; color: #5A6575">We</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 8px; border-radius: 6px; background: #F5C9B3"></div><span style="font-size: 11px; color: #5A6575">Th</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 32px; border-radius: 6px; background: #8CCFC8"></div><span style="font-size: 11px; font-weight: 700; color: #17212F">Fr</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 4px; border-radius: 6px; background: #E6ECEF"></div><span style="font-size: 11px; color: #5A6575">Sa</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 4px; border-radius: 6px; background: #E6ECEF"></div><span style="font-size: 11px; color: #5A6575">Su</span></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EDF0F4; padding-top: 14px">
+          <span style="font-size: 13px; color: #5A6575">Overtime balance</span>
+          <span style="font-size: 18px; font-weight: 700; color: #0F5F5C">+3:30 h</span>
+        </div>
+      </section>
+
+      <!-- Timeline + entries -->
+      <section aria-labelledby="tl-h" style="grid-column: span 2; background: #FFFFFF; border: 1px solid #E3E7ED; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+          <h2 id="tl-h" style="margin: 0; font-size: 15px; font-weight: 600">Today's timeline</h2>
+          <a href="#" style="font-size: 14px; font-weight: 600; text-decoration: none">Edit working times</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="position: relative; height: 34px; border-radius: 8px; background: #F3F5F8">
+            <div title="Work 08:02–12:00" style="position: absolute; left: 8.6%; width: 33%; top: 0; bottom: 0; background: #CDE7E4; border-radius: 8px 0 0 8px"></div>
+            <div title="Break 12:00–12:30" style="position: absolute; left: 41.6%; width: 4.2%; top: 0; bottom: 0; background: repeating-linear-gradient(45deg, #F7D7C4 0 6px, #FBE8DC 6px 12px)"></div>
+            <div title="Work 12:30–now" style="position: absolute; left: 45.8%; width: 22%; top: 0; bottom: 0; background: #CDE7E4; border-radius: 0 8px 8px 0"></div>
+            <div style="position: absolute; left: 9%; width: 16.5%; top: 6px; bottom: 6px; background: #2563EB; border-radius: 5px"></div>
+            <div style="position: absolute; left: 26%; width: 15%; top: 6px; bottom: 6px; background: #7C3AED; border-radius: 5px"></div>
+            <div style="position: absolute; left: 46.2%; width: 10%; top: 6px; bottom: 6px; background: #0F766E; border-radius: 5px"></div>
+            <div style="position: absolute; left: 56.6%; width: 11%; top: 6px; bottom: 6px; background: repeating-linear-gradient(90deg, #2563EB 0 8px, #5B8DEF 8px 16px); border-radius: 5px"></div>
+            <div style="position: absolute; left: 67.8%; top: -4px; bottom: -4px; width: 2px; background: #C2410C"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #5A6575; font-variant-numeric: tabular-nums"><span>07:00</span><span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>17:00</span><span>19:00</span></div>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+            <caption style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Project time booked today</caption>
+            <thead>
+              <tr style="text-align: left; color: #5A6575; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em">
+                <th scope="col" style="padding: 8px 8px 10px 0; font-weight: 600">Project</th>
+                <th scope="col" style="padding: 8px; font-weight: 600">Activity</th>
+                <th scope="col" style="padding: 8px; font-weight: 600">Note</th>
+                <th scope="col" style="padding: 8px; font-weight: 600; text-align: right">Time</th>
+                <th scope="col" style="padding: 8px 0 8px 8px; width: 88px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top: 1px solid #EDF0F4">
+                <td style="padding: 12px 8px 12px 0"><span style="display: inline-flex; align-items: center; gap: 10px; font-weight: 600"><span style="width: 10px; height: 10px; border-radius: 3px; background: #2563EB"></span>CRM-REL<span style="font-weight: 400; color: #5A6575">CRM Relaunch</span></span></td>
+                <td style="padding: 12px 8px">Consulting</td>
+                <td style="padding: 12px 8px; color: #5A6575">Workshop data migration</td>
+                <td style="padding: 12px 8px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums">2:00</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><button type="button" aria-label="Edit entry" style="width: 40px; height: 40px; border: 0; border-radius: 20px; background: transparent; color: #3C4757"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button></td>
+              </tr>
+              <tr style="border-top: 1px solid #EDF0F4">
+                <td style="padding: 12px 8px 12px 0"><span style="display: inline-flex; align-items: center; gap: 10px; font-weight: 600"><span style="width: 10px; height: 10px; border-radius: 3px; background: #7C3AED"></span>MEETINGS<span style="font-weight: 400; color: #5A6575">Internal meetings</span></span></td>
+                <td style="padding: 12px 8px">Meeting</td>
+                <td style="padding: 12px 8px; color: #5A6575">Sprint review</td>
+                <td style="padding: 12px 8px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums">1:48</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><button type="button" aria-label="Edit entry" style="width: 40px; height: 40px; border: 0; border-radius: 20px; background: transparent; color: #3C4757"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button></td>
+              </tr>
+              <tr style="border-top: 1px solid #EDF0F4">
+                <td style="padding: 12px 8px 12px 0"><span style="display: inline-flex; align-items: center; gap: 10px; font-weight: 600"><span style="width: 10px; height: 10px; border-radius: 3px; background: #0F766E"></span>INTERNAL-TOOLS<span style="font-weight: 400; color: #5A6575">Internal tools</span></span></td>
+                <td style="padding: 12px 8px">Development</td>
+                <td style="padding: 12px 8px; color: #5A6575">—</td>
+                <td style="padding: 12px 8px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums">1:12</td>
+                <td style="padding: 12px 0 12px 8px; text-align: right"><button type="button" aria-label="Edit entry" style="width: 40px; height: 40px; border: 0; border-radius: 20px; background: transparent; color: #3C4757"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="border-top: 2px solid #E3E7ED">
+                <td colspan="3" style="padding: 12px 8px 0 0; color: #5A6575">Booked 5:00 of 5:47 worked · <span style="color: #9A3412; font-weight: 600">0:47 not yet booked</span></td>
+                <td style="padding: 12px 8px 0; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums">5:00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- Right column: quick booking + hints -->
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <section aria-labelledby="qb-h" style="background: #FFFFFF; border: 1px solid #E3E7ED; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <h2 id="qb-h" style="margin: 0; font-size: 15px; font-weight: 600">Quick booking</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid #D5DBE3; background: #FFFFFF; font: 500 13px Inter, sans-serif; color: #2C3646">★ CRM-REL · Consulting</button>
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid #D5DBE3; background: #FFFFFF; font: 500 13px Inter, sans-serif; color: #2C3646">★ PORTAL · Development</button>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #3C4757">Project
+            <select style="height: 44px; border-radius: 10px; border: 1px solid #C9D1DB; padding: 0 12px; font: 14px Inter, sans-serif; color: #17212F; background: #FFFFFF"><option>CRM-REL · CRM Relaunch</option></select>
+          </label>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #3C4757">Activity
+              <select style="height: 44px; border-radius: 10px; border: 1px solid #C9D1DB; padding: 0 12px; font: 14px Inter, sans-serif; color: #17212F; background: #FFFFFF"><option>Consulting</option></select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #3C4757">Duration
+              <input value="0:47" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9D1DB; padding: 0 12px; font: 14px Inter, sans-serif; color: #17212F">
+            </label>
+          </div>
+          <button type="button" style="height: 44px; border-radius: 22px; border: 0; background: {{accent}}; color: #FFFFFF; font: 600 14px Inter, sans-serif">Book 0:47</button>
+        </section>
+
+        <section aria-labelledby="hint-h" style="background: #FFF7F2; border: 1px solid #F5D3BF; border-radius: 18px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+          <h2 id="hint-h" style="margin: 0; font-size: 15px; font-weight: 600; color: #7C2D12; display: flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l9 16H3z"></path><path d="M12 10v4M12 17h.01"></path></svg>2 things to check</h2>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #431407; text-decoration: none"><span>Thu 19 Nov: no time recorded</span><span style="font-weight: 600; color: #9A3412">Fix</span></a>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #431407; text-decoration: none"><span>Today: 0:47 worked but not booked</span><span style="font-weight: 600; color: #9A3412">Book</span></a>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0F6B67","options":["#0F6B67","#1D4ED8","#6D28D9","#B4232A"]},"$preview":{"width":1440,"height":1010}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#0F6B67';
+    const soft = { '#0F6B67': '#DCEBEA', '#1D4ED8': '#DCE6FB', '#6D28D9': '#EAE0FA', '#B4232A': '#F8E0E0' }[accent] || '#E6ECEF';
+    return { accent: accent, accentSoft: soft };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Today</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: {{t.ink}}; background: {{t.bg}}; color-scheme: {{t.scheme}}; min-height: 1010px; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <!-- Sidebar -->
+  <nav aria-label="Main" style="flex: 0 0 248px; background: {{t.surface}}; border-right: 1px solid {{t.border}}; padding: 20px 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 8px">
+      <div style="width: 34px; height: 34px; border-radius: 10px; background: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.onAccent}}" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2M9 2h6"></path></svg>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-weight: 700; font-size: 16px; letter-spacing: -0.01em">Time Tracking</span>
+        <span style="font-size: 12px; color: {{t.muted}}">[Company name]</span>
+      </div>
+    </div>
+    <sc-for list="{{nav}}" as="g" hint-placeholder-count="2">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{t.muted}}; padding: 0 12px 6px">{{g.label}}</span>
+        <sc-for list="{{g.items}}" as="item" hint-placeholder-count="4">
+          <a href="#" aria-current="{{item.current}}" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; background: {{item.bg}}; color: {{item.color}}; font-weight: {{item.weight}}; font-size: 14px; text-decoration: none">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{item.d}}"></path></svg>{{item.label}}</a>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid {{t.border}}; padding-top: 12px">
+      <sc-for list="{{footerNav}}" as="item" hint-placeholder-count="2">
+        <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: {{t.ink2}}; font-size: 14px; text-decoration: none">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{item.d}}"></path></svg>{{item.label}}</a>
+      </sc-for>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 18px 32px; background: {{t.surface}}; border-bottom: 1px solid {{t.border}}">
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-right: auto">
+        <span style="font-size: 13px; color: {{t.muted}}">Friday, 20 November 2026</span>
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em">Good afternoon, Anna</h1>
+      </div>
+      <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 10px; background: {{t.subtle}}; border: 1px solid {{t.border}}; color: {{t.muted}}; font-size: 14px; min-width: 220px">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+        <input type="search" placeholder="Search projects, days…" style="border: 0; background: transparent; font: inherit; color: {{t.ink}}; outline: none; width: 100%">
+      </label>
+      <button type="button" aria-label="{{themeLabel}}" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; color: {{t.ink2}}; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{themeIcon}}"></path></svg>
+      </button>
+      <div role="group" aria-label="Language" style="display: flex; border: 1px solid {{t.borderStrong}}; border-radius: 10px; overflow: hidden; height: 40px">
+        <button type="button" aria-pressed="true" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: {{t.ink}}; color: {{t.surface}}">EN</button>
+        <button type="button" aria-pressed="false" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: {{t.surface}}; color: {{t.ink2}}">DE</button>
+      </div>
+      <button type="button" aria-label="Account menu: Anna Employee" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 10px 0 4px; border: 1px solid {{t.border}}; border-radius: 22px; background: {{t.surface}}; font: 500 14px Inter, sans-serif; color: {{t.ink}}">
+        <span style="width: 36px; height: 36px; border-radius: 18px; background: {{t.accentSoft}}; color: {{t.accentInk}}; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center">AE</span>Anna Employee
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+    </header>
+
+    <main style="padding: 28px 32px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1240px; width: 100%; box-sizing: border-box">
+
+      <!-- Hero: running day -->
+      <section aria-labelledby="day-h" style="grid-column: span 2; background: {{t.heroBg}}; border: 1px solid {{t.heroBorder}}; color: #FFFFFF; border-radius: 18px; padding: 26px 28px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+          <h2 id="day-h" style="margin: 0; font-size: 15px; font-weight: 600; color: #BFE3DF">Work day running</h2>
+          <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #DDF1EE; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px"><span style="width: 8px; height: 8px; border-radius: 4px; background: #5EEAD4"></span>Started 08:02 · 1 break (0:30)</span>
+        </div>
+        <div style="display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 64px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">5:47<span style="color: #8CCFC8">:12</span></span>
+            <span style="font-size: 14px; color: #BFE3DF">worked today · target 8:00</span>
+          </div>
+          <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px">
+            <div style="height: 10px; border-radius: 5px; background: rgba(255,255,255,0.14); overflow: hidden"><div style="width: 72%; height: 100%; background: #5EEAD4; border-radius: 5px"></div></div>
+            <span style="font-size: 13px; color: #BFE3DF">2:13 to go · expected end around 16:45</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap">
+          <button type="button" style="height: 44px; padding: 0 20px; border-radius: 22px; border: 0; background: #FFFFFF; color: #10302F; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 5v14M15 5v14"></path></svg>Take a break</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.45); background: transparent; color: #FFFFFF; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>End work day</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; flex-wrap: wrap">
+          <span style="width: 10px; height: 10px; border-radius: 5px; background: #93C5FD"></span>
+          <div style="display: flex; flex-direction: column; margin-right: auto">
+            <span style="font-size: 14px; font-weight: 600">CRM-REL · CRM Relaunch</span>
+            <span style="font-size: 13px; color: #BFE3DF">Project timer · Consulting</span>
+          </div>
+          <span style="font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums">1:24</span>
+          <button type="button" style="height: 40px; padding: 0 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.45); background: transparent; color: #FFFFFF; font: 600 13px Inter, sans-serif">Stop &amp; book</button>
+        </div>
+      </section>
+
+      <!-- This week -->
+      <section aria-labelledby="wk-h" style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <h2 id="wk-h" style="margin: 0; font-size: 15px; font-weight: 600">This week</h2>
+          <a href="Week.dc.html" style="font-size: 14px; font-weight: 600; color: {{t.link}}; text-decoration: none">Open week</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px">
+          <svg role="img" aria-label="29:47 of 40:00 hours worked this week" width="104" height="104" viewBox="0 0 104 104">
+            <circle cx="52" cy="52" r="44" fill="none" stroke="{{t.track}}" stroke-width="12"></circle>
+            <circle cx="52" cy="52" r="44" fill="none" stroke="{{t.accent}}" stroke-width="12" stroke-linecap="round" stroke-dasharray="206 276" transform="rotate(-90 52 52)"></circle>
+            <text x="52" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="{{t.ink}}">29:47</text>
+            <text x="52" y="68" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="{{t.muted}}">of 40:00</text>
+          </svg>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: {{t.ink2}}">
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{t.accent}}"></span>Worked 29:47</div>
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{t.p1}}"></span>Booked 27:30</div>
+            <div style="display: flex; gap: 8px; align-items: center"><span style="width: 8px; height: 8px; border-radius: 4px; background: {{t.warnStrong}}"></span>Not booked 2:17</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; align-items: end; height: 70px">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 44px; border-radius: 6px; background: {{t.accent}}"></div><span style="font-size: 11px; color: {{t.muted}}">Mo</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 48px; border-radius: 6px; background: {{t.accent}}"></div><span style="font-size: 11px; color: {{t.muted}}">Tu</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 42px; border-radius: 6px; background: {{t.accent}}"></div><span style="font-size: 11px; color: {{t.muted}}">We</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 8px; border-radius: 6px; background: {{t.missingBar}}"></div><span style="font-size: 11px; color: {{t.muted}}">Th</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 32px; border-radius: 6px; background: {{t.partialBar}}"></div><span style="font-size: 11px; font-weight: 700; color: {{t.ink}}">Fr</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 4px; border-radius: 6px; background: {{t.track}}"></div><span style="font-size: 11px; color: {{t.muted}}">Sa</span></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 100%; height: 4px; border-radius: 6px; background: {{t.track}}"></div><span style="font-size: 11px; color: {{t.muted}}">Su</span></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid {{t.border}}; padding-top: 14px">
+          <span style="font-size: 13px; color: {{t.muted}}">Overtime balance</span>
+          <span style="font-size: 18px; font-weight: 700; color: {{t.accentText}}">+3:30 h</span>
+        </div>
+      </section>
+
+      <!-- Timeline + entries -->
+      <section aria-labelledby="tl-h" style="grid-column: span 2; background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+          <h2 id="tl-h" style="margin: 0; font-size: 15px; font-weight: 600">Today's timeline</h2>
+          <a href="#" style="font-size: 14px; font-weight: 600; color: {{t.link}}; text-decoration: none">Edit working times</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="position: relative; height: 34px; border-radius: 8px; background: {{t.subtle}}">
+            <div style="position: absolute; left: 8.6%; width: 33%; top: 0; bottom: 0; background: {{t.workBand}}; border-radius: 8px 0 0 8px"></div>
+            <div style="position: absolute; left: 41.6%; width: 4.2%; top: 0; bottom: 0; background: {{t.breakBand}}"></div>
+            <div style="position: absolute; left: 45.8%; width: 22%; top: 0; bottom: 0; background: {{t.workBand}}; border-radius: 0 8px 8px 0"></div>
+            <div style="position: absolute; left: 9%; width: 16.5%; top: 6px; bottom: 6px; background: {{t.p1}}; border-radius: 5px"></div>
+            <div style="position: absolute; left: 26%; width: 15%; top: 6px; bottom: 6px; background: {{t.p2}}; border-radius: 5px"></div>
+            <div style="position: absolute; left: 46.2%; width: 10%; top: 6px; bottom: 6px; background: {{t.p3}}; border-radius: 5px"></div>
+            <div style="position: absolute; left: 56.6%; width: 11%; top: 6px; bottom: 6px; background: {{t.p1}}; opacity: 0.7; border-radius: 5px"></div>
+            <div style="position: absolute; left: 67.8%; top: -4px; bottom: -4px; width: 2px; background: {{t.warnStrong}}"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: {{t.muted}}; font-variant-numeric: tabular-nums"><span>07:00</span><span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>17:00</span><span>19:00</span></div>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px">
+            <caption style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Project time booked today</caption>
+            <thead>
+              <tr style="text-align: left; color: {{t.muted}}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em">
+                <th scope="col" style="padding: 8px 8px 10px 0; font-weight: 600">Project</th>
+                <th scope="col" style="padding: 8px; font-weight: 600">Activity</th>
+                <th scope="col" style="padding: 8px; font-weight: 600">Note</th>
+                <th scope="col" style="padding: 8px; font-weight: 600; text-align: right">Time</th>
+                <th scope="col" style="padding: 8px 0 8px 8px; width: 56px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{entries}}" as="e" hint-placeholder-count="3">
+                <tr style="border-top: 1px solid {{t.border}}">
+                  <td style="padding: 12px 8px 12px 0"><span style="display: inline-flex; align-items: center; gap: 10px; font-weight: 600"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{e.color}}"></span>{{e.code}}<span style="font-weight: 400; color: {{t.muted}}">{{e.name}}</span></span></td>
+                  <td style="padding: 12px 8px">{{e.activity}}</td>
+                  <td style="padding: 12px 8px; color: {{t.muted}}">{{e.note}}</td>
+                  <td style="padding: 12px 8px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums">{{e.time}}</td>
+                  <td style="padding: 12px 0 12px 8px; text-align: right"><button type="button" aria-label="Edit {{e.code}} entry" style="width: 40px; height: 40px; border: 0; border-radius: 20px; background: transparent; color: {{t.ink2}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg></button></td>
+                </tr>
+              </sc-for>
+            </tbody>
+            <tfoot>
+              <tr style="border-top: 2px solid {{t.border}}">
+                <td colspan="3" style="padding: 12px 8px 0 0; color: {{t.muted}}">Booked 5:00 of 5:47 worked · <span style="color: {{t.warnStrong}}; font-weight: 600">0:47 not yet booked</span></td>
+                <td style="padding: 12px 8px 0; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums">5:00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <section aria-labelledby="qb-h" style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+          <h2 id="qb-h" style="margin: 0; font-size: 15px; font-weight: 600">Quick booking</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 500 13px Inter, sans-serif; color: {{t.ink2}}">★ CRM-REL · Consulting</button>
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 500 13px Inter, sans-serif; color: {{t.ink2}}">★ PORTAL · Development</button>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: {{t.ink2}}">Project
+            <select style="height: 44px; border-radius: 10px; border: 1px solid {{t.borderStrong}}; padding: 0 12px; font: 14px Inter, sans-serif; color: {{t.ink}}; background: {{t.field}}"><option>CRM-REL · CRM Relaunch</option></select>
+          </label>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: {{t.ink2}}">Activity
+              <select style="height: 44px; border-radius: 10px; border: 1px solid {{t.borderStrong}}; padding: 0 12px; font: 14px Inter, sans-serif; color: {{t.ink}}; background: {{t.field}}"><option>Consulting</option></select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: {{t.ink2}}">Duration
+              <input value="0:47" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid {{t.borderStrong}}; padding: 0 12px; font: 14px Inter, sans-serif; color: {{t.ink}}; background: {{t.field}}">
+            </label>
+          </div>
+          <button type="button" style="height: 44px; border-radius: 22px; border: 0; background: {{t.accent}}; color: {{t.onAccent}}; font: 600 14px Inter, sans-serif">Book 0:47</button>
+        </section>
+
+        <section aria-labelledby="hint-h" style="background: {{t.warnBg}}; border: 1px solid {{t.warnBorder}}; border-radius: 18px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+          <h2 id="hint-h" style="margin: 0; font-size: 15px; font-weight: 600; color: {{t.warnInk}}; display: flex; align-items: center; gap: 8px">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"></path></svg>2 things to check</h2>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: {{t.warnInk}}; text-decoration: none"><span>Thu 19 Nov: no time recorded</span><span style="font-weight: 600; color: {{t.warnStrong}}">Fix</span></a>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: {{t.warnInk}}; text-decoration: none"><span>Today: 0:47 worked but not booked</span><span style="font-weight: 600; color: {{t.warnStrong}}">Book</span></a>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":1010}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = (this.props.theme ?? 'light') === 'dark';
+    const L = {
+      scheme: 'light', bg: '#F3F5F8', surface: '#FFFFFF', subtle: '#F3F5F8', field: '#FFFFFF', border: '#E3E7ED', borderStrong: '#C9D1DB',
+      ink: '#17212F', ink2: '#3C4757', muted: '#5A6575', link: '#0F5F5C',
+      accent: '#0F6B67', onAccent: '#FFFFFF', accentText: '#0F5F5C', accentSoft: '#DCEBEA', accentInk: '#0B4F4C',
+      heroBg: '#10302F', heroBorder: '#10302F', track: '#E6ECEF', partialBar: '#8CCFC8', missingBar: '#F5C9B3',
+      workBand: '#CDE7E4', breakBand: 'repeating-linear-gradient(45deg, #F7D7C4 0 6px, #FBE8DC 6px 12px)',
+      warnBg: '#FFF7F2', warnBorder: '#F5D3BF', warnInk: '#7C2D12', warnStrong: '#9A3412',
+      p1: '#2563EB', p2: '#7C3AED', p3: '#0F766E'
+    };
+    const D = {
+      scheme: 'dark', bg: '#0E1416', surface: '#172024', subtle: '#1F2A2F', field: '#11191C', border: '#2A363C', borderStrong: '#3D4B52',
+      ink: '#E6EDEF', ink2: '#C2CDD1', muted: '#93A1A7', link: '#7FD4CC',
+      accent: '#4FB8B0', onAccent: '#04211F', accentText: '#7FD4CC', accentSoft: '#183C3A', accentInk: '#A8E6DF',
+      heroBg: '#123A37', heroBorder: '#1E5552', track: '#26333A', partialBar: '#2E7D77', missingBar: '#7A3B1E',
+      workBand: '#1F4542', breakBand: 'repeating-linear-gradient(45deg, #5A3520 0 6px, #46291A 6px 12px)',
+      warnBg: '#2A1C14', warnBorder: '#5A3520', warnInk: '#FDD5B8', warnStrong: '#FB923C',
+      p1: '#60A5FA', p2: '#A78BFA', p3: '#2DD4BF'
+    };
+    const t = dark ? D : L;
+    const item = (label, d, active) => ({ label: label, d: d, current: active ? 'page' : 'false', bg: active ? t.accentSoft : 'transparent', color: active ? t.accentInk : t.ink2, weight: active ? 600 : 400 });
+    return {
+      t: t,
+      themeLabel: dark ? 'Switch to light theme' : 'Switch to dark theme',
+      themeIcon: dark ? 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 1 0 8a4 4 0 1 1 0-8z' : 'M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z',
+      nav: [
+        { label: 'My time', items: [
+          item('Today', 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z', true),
+          item('Week', 'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4', false),
+          item('Absences', 'M4 20c2-5 5-8 8-8s6 3 8 8M12 3a3 3 0 1 1 0 6a3 3 0 1 1 0-6z', false),
+          item('Balance & summary', 'M4 20V10M10 20V4M16 20v-7M22 20H2', false)
+        ] },
+        { label: 'Insights', items: [
+          item('Reports', 'M6 3h9l4 4v14H6zM9 13h7M9 17h5', false),
+          item('My data', 'M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3', false)
+        ] }
+      ],
+      footerNav: [
+        { label: 'Help & guide', d: 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18zM9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01' },
+        { label: 'Settings', d: 'M12 9a3 3 0 1 1 0 6a3 3 0 1 1 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1' }
+      ],
+      entries: [
+        { code: 'CRM-REL', name: 'CRM Relaunch', activity: 'Consulting', note: 'Workshop data migration', time: '2:00', color: t.p1 },
+        { code: 'MEETINGS', name: 'Internal meetings', activity: 'Meeting', note: 'Sprint review', time: '1:48', color: t.p2 },
+        { code: 'INTERNAL-TOOLS', name: 'Internal Tools', activity: 'Development', note: '—', time: '1:12', color: t.p3 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

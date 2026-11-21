@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Week timesheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: {{t.ink}}; background: {{t.bg}}; color-scheme: {{t.scheme}}; min-height: 1100px; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <!-- Sidebar -->
+  <nav aria-label="Main" style="flex: 0 0 248px; background: {{t.surface}}; border-right: 1px solid {{t.border}}; padding: 20px 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 8px">
+      <div style="width: 34px; height: 34px; border-radius: 10px; background: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.onAccent}}" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2M9 2h6"></path></svg>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-weight: 700; font-size: 16px; letter-spacing: -0.01em">Time Tracking</span>
+        <span style="font-size: 12px; color: {{t.muted}}">[Company name]</span>
+      </div>
+    </div>
+    <sc-for list="{{nav}}" as="g" hint-placeholder-count="2">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{t.muted}}; padding: 0 12px 6px">{{g.label}}</span>
+        <sc-for list="{{g.items}}" as="item" hint-placeholder-count="4">
+          <a href="#" aria-current="{{item.current}}" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; background: {{item.bg}}; color: {{item.color}}; font-weight: {{item.weight}}; font-size: 14px; text-decoration: none">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{item.d}}"></path></svg>{{item.label}}</a>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid {{t.border}}; padding-top: 12px">
+      <sc-for list="{{footerNav}}" as="item" hint-placeholder-count="2">
+        <a href="#" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: {{t.ink2}}; font-size: 14px; text-decoration: none">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{item.d}}"></path></svg>{{item.label}}</a>
+      </sc-for>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 18px 32px; background: {{t.surface}}; border-bottom: 1px solid {{t.border}}">
+      <div style="display: flex; flex-direction: column; gap: 2px; margin-right: auto">
+        <span style="font-size: 13px; color: {{t.muted}}">Calendar week 47</span>
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em">Week</h1>
+      </div>
+      <label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 10px; background: {{t.subtle}}; border: 1px solid {{t.border}}; color: {{t.muted}}; font-size: 14px; min-width: 220px">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</span>
+        <input type="search" placeholder="Search projects, days…" style="border: 0; background: transparent; font: inherit; color: {{t.ink}}; outline: none; width: 100%">
+      </label>
+      <button type="button" aria-label="{{themeLabel}}" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; color: {{t.ink2}}; display: flex; align-items: center; justify-content: center">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{themeIcon}}"></path></svg>
+      </button>
+      <div role="group" aria-label="Language" style="display: flex; border: 1px solid {{t.borderStrong}}; border-radius: 10px; overflow: hidden; height: 40px">
+        <button type="button" aria-pressed="true" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: {{t.ink}}; color: {{t.surface}}">EN</button>
+        <button type="button" aria-pressed="false" style="border: 0; padding: 0 12px; font: 600 13px Inter, sans-serif; background: {{t.surface}}; color: {{t.ink2}}">DE</button>
+      </div>
+      <button type="button" aria-label="Account menu: Anna Employee" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 10px 0 4px; border: 1px solid {{t.border}}; border-radius: 22px; background: {{t.surface}}; font: 500 14px Inter, sans-serif; color: {{t.ink}}">
+        <span style="width: 36px; height: 36px; border-radius: 18px; background: {{t.accentSoft}}; color: {{t.accentInk}}; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center">AE</span>Anna Employee
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+    </header>
+
+    <main style="padding: 24px 32px 40px; display: flex; flex-direction: column; gap: 20px; max-width: 1240px; width: 100%; box-sizing: border-box">
+
+      <!-- Week toolbar -->
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 6px; margin-right: auto">
+          <button type="button" aria-label="Previous week" style="width: 40px; height: 40px; border-radius: 20px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+          <h2 style="margin: 0 8px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em">16 – 22 November 2026</h2>
+          <button type="button" aria-label="Next week" style="width: 40px; height: 40px; border-radius: 20px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+          <button type="button" style="height: 40px; padding: 0 14px; border: 0; border-radius: 20px; background: transparent; color: {{t.link}}; font: 600 14px Inter, sans-serif">This week</button>
+        </div>
+        <div role="group" aria-label="View" style="display: flex; background: {{t.subtle}}; border: 1px solid {{t.border}}; border-radius: 12px; padding: 3px">
+          <button type="button" aria-pressed="false" style="height: 36px; padding: 0 16px; border: 0; border-radius: 9px; background: transparent; font: 500 14px Inter, sans-serif; color: {{t.ink2}}">Day</button>
+          <button type="button" aria-pressed="true" style="height: 36px; padding: 0 16px; border: 0; border-radius: 9px; background: {{t.surface}}; font: 600 14px Inter, sans-serif; color: {{t.ink}}; box-shadow: {{t.segShadow}}">Week</button>
+          <button type="button" aria-pressed="false" style="height: 36px; padding: 0 16px; border: 0; border-radius: 9px; background: transparent; font: 500 14px Inter, sans-serif; color: {{t.ink2}}">Month</button>
+        </div>
+        <button type="button" style="height: 44px; padding: 0 18px; border-radius: 22px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 600 14px Inter, sans-serif; color: {{t.ink}}; display: inline-flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 8h10v12H10zM16 8V4H4v12h6"></path></svg>Copy last week</button>
+      </div>
+
+      <!-- KPI cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+        <div style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{t.muted}}">Target</span><span style="font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums">40:00</span></div>
+        <div style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{t.muted}}">Worked</span><span style="font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums">29:47</span></div>
+        <div style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{t.muted}}">Booked on projects</span><span style="font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{t.accentText}}">27:30</span></div>
+        <div style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; color: {{t.muted}}">Still open this week</span><span style="font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; color: {{t.warnStrong}}">−10:13</span></div>
+      </div>
+
+      <!-- Timesheet -->
+      <section aria-labelledby="ts-h" style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; overflow: hidden">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px 8px">
+          <h2 id="ts-h" style="margin: 0; font-size: 15px; font-weight: 600">Booked time per project and day</h2>
+          <span style="font-size: 13px; color: {{t.muted}}">Changes save automatically</span>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 860px; border-collapse: collapse; font-size: 14px">
+            <thead>
+              <tr style="border-bottom: 1px solid {{t.border}}">
+                <th scope="col" style="text-align: left; padding: 12px 24px; font-size: 12px; font-weight: 600; color: {{t.muted}}; text-transform: uppercase; letter-spacing: 0.05em; width: 240px">Project · activity</th>
+                <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+                  <th scope="col" style="padding: 10px 6px; font-weight: 600; text-align: center; background: {{d.bg}}; color: {{d.ink}}"><span style="display: block; font-size: 12px; font-weight: 500; color: {{d.sub}}">{{d.name}}</span>{{d.num}}</th>
+                </sc-for>
+                <th scope="col" style="padding: 10px 24px 10px 12px; font-size: 12px; font-weight: 600; color: {{t.muted}}; text-transform: uppercase; letter-spacing: 0.05em; text-align: right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+                <tr style="border-bottom: 1px solid {{t.border}}">
+                  <th scope="row" style="text-align: left; padding: 10px 24px; font-weight: 400">
+                    <span style="display: flex; align-items: center; gap: 10px">
+                      <span style="width: 4px; height: 32px; border-radius: 2px; background: {{r.color}}"></span>
+                      <span style="display: flex; flex-direction: column"><span style="font-weight: 600">{{r.code}}</span><span style="font-size: 13px; color: {{t.muted}}">{{r.activity}}</span></span>
+                    </span>
+                  </th>
+                  <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="7">
+                    <td style="padding: 6px; background: {{c.bg}}"><input aria-label="{{c.label}}" value="{{c.v}}" style="width: 100%; box-sizing: border-box; height: 40px; border: 1px {{c.borderStyle}} {{c.border}}; border-radius: 10px; text-align: center; font: 500 14px Inter, sans-serif; font-variant-numeric: tabular-nums; color: {{t.ink}}; background: {{c.field}}"></td>
+                  </sc-for>
+                  <td style="padding: 10px 24px 10px 12px; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums">{{r.total}}</td>
+                </tr>
+              </sc-for>
+              <tr>
+                <td colspan="9" style="padding: 8px 16px">
+                  <button type="button" style="height: 40px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent; color: {{t.link}}; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add project row</button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background: {{t.subtle}}; border-top: 1px solid {{t.border}}">
+                <th scope="row" style="text-align: left; padding: 12px 24px; font-weight: 600">Booked</th>
+                <sc-for list="{{booked}}" as="b" hint-placeholder-count="7">
+                  <td style="text-align: center; font-weight: 600; font-variant-numeric: tabular-nums">{{b}}</td>
+                </sc-for>
+                <td style="text-align: right; padding: 12px 24px 12px 12px; font-weight: 700; font-variant-numeric: tabular-nums">27:30</td>
+              </tr>
+              <tr style="background: {{t.subtle}}">
+                <th scope="row" style="text-align: left; padding: 4px 24px 14px; font-weight: 600">Worked</th>
+                <sc-for list="{{worked}}" as="w" hint-placeholder-count="7">
+                  <td style="text-align: center; padding-bottom: 10px">
+                    <sc-if value="{{w.missing}}" hint-placeholder-val="{{ false }}">
+                      <span style="display: inline-flex; padding: 3px 10px; border-radius: 10px; background: {{t.warnBg}}; border: 1px solid {{t.warnBorder}}; color: {{t.warnStrong}}; font-size: 12px; font-weight: 600">missing</span>
+                    </sc-if>
+                    <sc-if value="{{w.ok}}" hint-placeholder-val="{{ true }}">
+                      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-variant-numeric: tabular-nums"><svg role="img" aria-label="complete" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{t.okInk}}" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5 9-10"></path></svg>{{w.v}}</span>
+                    </sc-if>
+                    <sc-if value="{{w.plain}}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size: 13px; color: {{t.muted}}">{{w.v}}</span>
+                    </sc-if>
+                  </td>
+                </sc-for>
+                <td style="text-align: right; padding: 4px 24px 14px 12px; font-weight: 700; font-variant-numeric: tabular-nums">29:47</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- Bottom cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+        <section aria-labelledby="chk-h" style="background: {{t.warnBg}}; border: 1px solid {{t.warnBorder}}; border-radius: 18px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+          <h2 id="chk-h" style="margin: 0; font-size: 15px; font-weight: 600; color: {{t.warnInk}}; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"></path></svg>2 things to check</h2>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: {{t.warnInk}}; text-decoration: none"><span>Thursday: no time recorded (target 8:00)</span><span style="font-weight: 600; color: {{t.warnStrong}}">Fix</span></a>
+          <a href="#" style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: {{t.warnInk}}; text-decoration: none"><span>2:17 worked but not booked (Mon, Wed, today)</span><span style="font-weight: 600; color: {{t.warnStrong}}">Book</span></a>
+        </section>
+
+        <section aria-labelledby="fav-h" style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+          <h2 id="fav-h" style="margin: 0; font-size: 15px; font-weight: 600">Add from favourites</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 500 13px Inter, sans-serif; color: {{t.ink2}}">+ TRAINING · Learning</button>
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 500 13px Inter, sans-serif; color: {{t.ink2}}">+ ADMIN · Organisation</button>
+            <button type="button" style="height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid {{t.borderStrong}}; background: {{t.surface}}; font: 500 13px Inter, sans-serif; color: {{t.ink2}}">+ DEMO-NEW · Development</button>
+          </div>
+          <p style="margin: 0; font-size: 13px; color: {{t.muted}}">Type 1.5 or 1:30 · Tab moves to the next day</p>
+        </section>
+
+        <section aria-labelledby="split-h" style="background: {{t.surface}}; border: 1px solid {{t.border}}; border-radius: 18px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+          <h2 id="split-h" style="margin: 0; font-size: 15px; font-weight: 600">Where the week went</h2>
+          <div role="img" aria-label="CRM-REL 12:00, PORTAL 7:00, MEETINGS 5:18, INTERNAL-TOOLS 3:12" style="display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px">
+            <div style="flex: 12; background: {{t.p1}}"></div><div style="flex: 7; background: {{t.p4}}"></div><div style="flex: 5.3; background: {{t.p2}}"></div><div style="flex: 3.2; background: {{t.p3}}"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; font-size: 13px">
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{t.p1}}"></span><span style="margin-right: auto">CRM-REL</span>12:00</span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{t.p4}}"></span><span style="margin-right: auto">PORTAL</span>7:00</span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{t.p2}}"></span><span style="margin-right: auto">MEETINGS</span>5:18</span>
+            <span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{t.p3}}"></span><span style="margin-right: auto">INTERNAL-TOOLS</span>3:12</span>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = (this.props.theme ?? 'light') === 'dark';
+    const L = {
+      scheme: 'light', bg: '#F3F5F8', surface: '#FFFFFF', subtle: '#F6F8FA', field: '#FFFFFF', border: '#E3E7ED', borderStrong: '#C9D1DB',
+      ink: '#17212F', ink2: '#3C4757', muted: '#5A6575', link: '#0F5F5C', segShadow: '0 1px 2px rgba(0,0,0,0.12)',
+      accent: '#0F6B67', onAccent: '#FFFFFF', accentText: '#0F5F5C', accentSoft: '#DCEBEA', accentInk: '#0B4F4C',
+      todayCol: '#EAF4F3', todayBorder: '#9CCFC9', weekendCol: '#F3F5F8', weekendBorder: '#D5DBE3',
+      warnBg: '#FFF7F2', warnBorder: '#F5D3BF', warnInk: '#7C2D12', warnStrong: '#9A3412', okInk: '#15803D',
+      p1: '#2563EB', p2: '#7C3AED', p3: '#0F766E', p4: '#B45309'
+    };
+    const D = {
+      scheme: 'dark', bg: '#0E1416', surface: '#172024', subtle: '#1B252A', field: '#11191C', border: '#2A363C', borderStrong: '#3D4B52',
+      ink: '#E6EDEF', ink2: '#C2CDD1', muted: '#93A1A7', link: '#7FD4CC', segShadow: 'none',
+      accent: '#4FB8B0', onAccent: '#04211F', accentText: '#7FD4CC', accentSoft: '#183C3A', accentInk: '#A8E6DF',
+      todayCol: '#15302E', todayBorder: '#2E6B66', weekendCol: '#131B1E', weekendBorder: '#34424A',
+      warnBg: '#2A1C14', warnBorder: '#5A3520', warnInk: '#FDD5B8', warnStrong: '#FB923C', okInk: '#86EFAC',
+      p1: '#60A5FA', p2: '#A78BFA', p3: '#2DD4BF', p4: '#F59E0B'
+    };
+    const t = dark ? D : L;
+    const item = (label, d, active) => ({ label: label, d: d, current: active ? 'page' : 'false', bg: active ? t.accentSoft : 'transparent', color: active ? t.accentInk : t.ink2, weight: active ? 600 : 400 });
+    const names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri · today', 'Sat', 'Sun'];
+    const longNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const colBg = (i) => i === 4 ? t.todayCol : (i > 4 ? t.weekendCol : 'transparent');
+    const days = names.map((n, i) => ({ name: n, num: String(16 + i), bg: colBg(i), ink: i === 4 ? t.accentInk : (i > 4 ? t.muted : t.ink), sub: i === 4 ? t.accentInk : t.muted }));
+    const mk = (code, activity, color, vals, total) => ({
+      code: code, activity: activity, color: color, total: total,
+      cells: vals.map((v, i) => ({ v: v, label: code + ' ' + longNames[i], bg: colBg(i), field: i > 4 ? 'transparent' : t.field, borderStyle: i > 4 ? 'dashed' : 'solid', border: i === 4 ? t.todayBorder : (i > 4 ? t.weekendBorder : t.border) }))
+    });
+    return {
+      t: t,
+      themeLabel: dark ? 'Switch to light theme' : 'Switch to dark theme',
+      themeIcon: dark ? 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 1 0 8a4 4 0 1 1 0-8z' : 'M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z',
+      nav: [
+        { label: 'My time', items: [
+          item('Today', 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z', false),
+          item('Week', 'M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4', true),
+          item('Absences', 'M4 20c2-5 5-8 8-8s6 3 8 8M12 3a3 3 0 1 1 0 6a3 3 0 1 1 0-6z', false),
+          item('Balance & summary', 'M4 20V10M10 20V4M16 20v-7M22 20H2', false)
+        ] },
+        { label: 'Insights', items: [
+          item('Reports', 'M6 3h9l4 4v14H6zM9 13h7M9 17h5', false),
+          item('My data', 'M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3', false)
+        ] }
+      ],
+      footerNav: [
+        { label: 'Help & guide', d: 'M12 3a9 9 0 1 1 0 18a9 9 0 1 1 0-18zM9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01' },
+        { label: 'Settings', d: 'M12 9a3 3 0 1 1 0 6a3 3 0 1 1 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1' }
+      ],
+      days: days,
+      rows: [
+        mk('CRM-REL', 'Consulting', t.p1, ['4:00', '3:00', '3:00', '', '2:00', '', ''], '12:00'),
+        mk('PORTAL', 'Development', t.p4, ['2:00', '3:00', '2:00', '', '', '', ''], '7:00'),
+        mk('MEETINGS', 'Meeting', t.p2, ['1:30', '1:00', '1:00', '', '1:48', '', ''], '5:18'),
+        mk('INTERNAL-TOOLS', 'Development', t.p3, ['', '1:00', '1:00', '', '1:12', '', ''], '3:12')
+      ],
+      booked: ['7:30', '8:00', '7:00', '0:00', '5:00', '', ''],
+      worked: [
+        { v: '8:00', ok: true, missing: false, plain: false },
+        { v: '8:00', ok: true, missing: false, plain: false },
+        { v: '8:00', ok: true, missing: false, plain: false },
+        { v: '', ok: false, missing: true, plain: false },
+        { v: '5:47 running', ok: false, missing: false, plain: true },
+        { v: '', ok: false, missing: false, plain: true },
+        { v: '', ok: false, missing: false, plain: true }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

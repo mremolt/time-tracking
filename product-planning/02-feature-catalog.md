@@ -2,10 +2,12 @@
 
 Each feature has an ID, a short description and its **decided priority** (MVP / Phase 2 / Out of scope), based on the decisions in [03-decisions.md](03-decisions.md) (referenced as → **D-xx**).
 
+> **UX:** every feature with a screen is built to the approved design in [06-ux-design.md](06-ux-design.md) and its mockups (→ **D-13**). The *Screen* hints below say where a feature lives in that design.
+
 Modules:
 A. Authentication & account · B. Time recording · C. Period closing · U. User administration · E. Project administration · F. Dashboard & reports · G. Notifications · H. Compliance, audit & data protection · I. General usability
 
-Summary: **MVP 60** · **Phase 2 5** · **Out of scope 17** (see tables below; dropped features are kept for traceability).
+Summary: **MVP 62** · **Phase 2 5** · **Out of scope 18** (see tables below; dropped features are kept for traceability).
 
 ---
 
@@ -19,27 +21,27 @@ Summary: **MVP 60** · **Phase 2 5** · **Out of scope 17** (see tables below; d
 | A-04 | Logout & session timeout | Manual logout; automatic logout after inactivity. | MVP |
 | A-05 | Role-based access | Employee, Project Lead, Backoffice Admin, Management (read-only) → **D-10**. | MVP |
 | A-06 | Two-factor authentication | Second factor at login. Not in MVP – accepted risk R-03. | Phase 2 |
-| A-07 | Personal settings | Language (DE/EN), default project, preferred view, notification preferences. | MVP |
+| A-07 | Personal settings | Language (DE/EN), theme (System / Light / Dark → **D-14**), default project, preferred view, notification preferences. Screen: Settings, plus DE/EN and theme switch in the top bar. | MVP |
 | A-08 | Deactivated users cannot log in | Access ends immediately on deactivation; data remains. | MVP |
 
 ## B. Time Recording (Employee)
 
 | ID | Feature | Description | Priority |
 |----|---------|-------------|----------|
-| B-01 | Manual entry | Add an entry with date, project, activity, duration or start/end, optional description. | MVP |
-| B-02 | Week view (grid) | Rows = projects, columns = days; overview and fast entry. | MVP |
-| B-03 | Day view / list | Today's working time, breaks and project entries with totals. | MVP |
+| B-01 | Manual entry | Add an entry with date, project, activity, duration or start/end, optional description. Screen: quick booking on Today, timesheet, "Record a working day" dialog on Day. | MVP |
+| B-02 | Week view (grid) | Rows = projects, columns = days; overview and fast entry. Screen: **Week** timesheet with figure tiles, today/weekend columns, status per day. | MVP |
+| B-03 | Day view / list | Working time, breaks and project entries with totals, as timeline and table. Screen: **Today** (current day) and **Day** page (any date) → **D-17**. | MVP |
 | B-04 | Edit / delete own entries | Allowed until the period is locked → **D-08**. | MVP |
 | B-05 | Only assigned + open projects selectable | → **D-06**. | MVP |
 | B-06 | Billable flag | → **D-04b** (no client billing). | Out of scope |
-| B-07 | Start/stop timer | "Start work" / "Pause" / "Stop" and project timer; creates entries automatically. | MVP |
+| B-07 | Start/stop timer | "Start work" / "Pause" / "Stop" and project timer; creates entries automatically. Screen: running-day panel on **Today**. | MVP |
 | B-08 | Start/end times | Entries recorded as times of day, not only durations → **D-01**. | MVP |
-| B-09 | Copy previous day/week | Duplicate recurring project rows. | MVP |
+| B-09 | Copy previous day/week | Duplicate recurring project rows. Screen: "Copy last week" in the Week toolbar; "Copy previous day" in each day's column menu. | MVP |
 | B-10 | Favourites / recent projects | Most-used projects first. | MVP |
 | B-11 | Mandatory description | Per project configurable. | Phase 2 |
 | B-12 | Activity selection | From the global activity list → **D-04**. | MVP |
-| B-13 | Own summaries & balance | Totals per day/week/month and per project; target vs. actual; overtime balance → **D-07**. | MVP |
-| B-14 | Gap hints | Highlight days without entries, below target, or where project time ≠ working time. | MVP |
+| B-13 | Own summaries & balance | Totals per day/week/month and per project; target vs. actual; overtime balance → **D-07**. Screen: "This week" card on Today, figure tiles on Week, **Balance & summary** page (incl. month). | MVP |
+| B-14 | Gap hints | Highlight days without entries, below target, or where project time ≠ working time. Screen: "Things to check" cards on Today and Week, day status in the timesheet. | MVP |
 | B-15 | Absence marker | Vacation, sick, holiday, other – counts towards target time → **D-05**. | MVP |
 | B-16 | Mobile-friendly use | Responsive web UI; no native app. | MVP |
 | B-17 | Recording deadline | Fixed number of days for changes → **D-08** (until lock instead). | Out of scope |
@@ -90,7 +92,7 @@ Summary: **MVP 60** · **Phase 2 5** · **Out of scope 17** (see tables below; d
 
 | ID | Feature | Description | Priority |
 |----|---------|-------------|----------|
-| F-01 | Overview dashboard | Total hours, hours per project/team, weekly trend, overtime totals, missing time, projects near budget. | MVP |
+| F-01 | Overview dashboard | Total hours, hours per project/team, weekly trend, overtime totals, missing time, projects near budget. Screen: **Dashboard** with filter row, five figure tiles, two charts, budget table, completeness by team. | MVP |
 | F-02 | Project report | Hours per user, per activity, per week/month; entry list; budget consumption. | MVP |
 | F-03 | User report | Working time, project hours, target vs. actual, overtime balance, absences. | MVP |
 | F-04 | Flexible filtering & grouping | Filter and group freely by period, team, project, user, activity. | MVP |
@@ -103,7 +105,7 @@ Summary: **MVP 60** · **Phase 2 5** · **Out of scope 17** (see tables below; d
 | F-11 | Scheduled reports by email | Not wanted. | Out of scope |
 | F-12 | Project lead view | Leads see project-time reports for their own projects → **D-10**. | MVP |
 | F-13 | Payroll export | Defined export of working time, overtime and absences per month, agreed with payroll. | MVP |
-| F-14 | Management view | Aggregated dashboard without per-person data → **D-10**. | MVP *(new, follows from D-10)* |
+| F-14 | Management view | Aggregated dashboard without per-person data → **D-10**. Screen: **Management overview**, same layout as the dashboard. | MVP *(new, follows from D-10)* |
 
 ## G. Notifications
 
@@ -129,9 +131,12 @@ Summary: **MVP 60** · **Phase 2 5** · **Out of scope 17** (see tables below; d
 
 | ID | Feature | Description | Priority |
 |----|---------|-------------|----------|
-| I-01 | Responsive web UI | Desktop, tablet, phone browser. | MVP |
+| I-01 | Responsive web UI | Desktop (side menu), tablet (navigation rail), phone browser (drawer, one column) → [06-ux-design.md §6.3](06-ux-design.md#63-layout-the-shell). | MVP |
 | I-02 | Languages | German and English → **D-12**. | MVP |
-| I-03 | Accessibility | Keyboard operation, contrast, screen-reader friendly forms. | MVP |
+| I-03 | Accessibility | Keyboard operation, WCAG 2.2 AA contrast in every theme, screen-reader friendly forms, text alternatives for charts → [06-ux-design.md §6.7](06-ux-design.md#67-accessibility-part-of-the-design). | MVP |
 | I-04 | Public holidays calendar | Per federal state; excluded from target time → **D-07**. | MVP |
 | I-05 | Help / onboarding | In-app hints and a short user guide (DE/EN). | MVP |
 | I-06 | Integrations | Not wanted; exports cover the need. | Out of scope |
+| I-07 | Light and dark theme | Approved design in light and dark, plus high contrast and forced colours; follows the system unless the user chooses → **D-14**. | MVP *(new, follows from D-13)* |
+| I-08 | Today start page | Employee start page bundling the running day, project timer, this week, timeline, quick booking and things to check → **D-15**. | MVP *(new, follows from D-13)* |
+| I-09 | Global search | Search field in the top bar → **D-16**. | Out of scope |
