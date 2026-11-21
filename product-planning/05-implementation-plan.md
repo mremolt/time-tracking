@@ -125,7 +125,7 @@ Decide and write down:
 - Bulk import of users and projects from a spreadsheet, with validation and an error report.
 - Internal default projects created and marked "open to everyone".
 - Nothing is ever hard-deleted. Users are deactivated and projects are archived.
-- **UX:** pages under Administration › **People** (tabs Users, Teams, Import) and › **Projects** (tabs Projects, Activities); each a table card with the main action in the page header; create/edit in a dialog or a sectioned form page (§6.4.4). No page with several unrelated forms.
+- **UX:** pages under Administration › **People** (tabs Users, Teams, Import) and › **Projects** (tabs Projects, Activities); each a table card with the main action in the page header; create/edit in a dialog or a sectioned form page (§6.4.4). No page with several unrelated forms. The project form includes the project colour (auto-assigned, optional override, D-18).
 
 **Done when:** journeys J3, J4 and J6 work end to end and the demo data from 0.3 imports without errors.
 
@@ -247,7 +247,7 @@ Decide and write down:
 **Goal:** an overview page for backoffice and an aggregated view for management.
 - Total hours, hours per project and team, weekly trend, overtime totals, missing time, projects close to their budget.
 - Management view contains **no per-person data**.
-- **UX** ([06-ux-design.md §6.4.3](06-ux-design.md#643-company-dashboard-backoffice-management-uses-the-same-layout), mockup `Dashboard.dc.html`): filter row with team filter, five figure tiles, hours per week (grouped bars with target line), hours by project (donut), project budgets table, completeness by team. The Management overview uses the same layout and says "sums only, no person shown" in the top bar.
+- **UX** ([06-ux-design.md §6.4.3](06-ux-design.md#643-company-dashboard-backoffice-management-uses-the-same-layout), mockup `Dashboard.dc.html`): filter row with team filter, five figure tiles, hours per week (grouped bars with target line), hours by project (donut), project budgets table, completeness by team (below 90 % = warning, D-21), export menu with CSV/Excel/PDF (D-19), overtime tile as cumulative balance (D-20), donut in the projects' own colours (D-18). The Management overview uses the same layout and says "sums only, no person shown" in the top bar.
 
 **Done when:** the management role cannot reach any per-person data, either through the UI or through exports, and the dashboard matches `Dashboard.dc.html` / `DashboardDark.dc.html`.
 

@@ -1,6 +1,6 @@
 # 3. Decision Log
 
-Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 – D-17 on 2026-11-21 after the UX review of the first implementation cycle). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
+Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 – D-17 on 2026-11-21 after the UX review of the first implementation cycle; mockup consistency decisions D-18 – D-21 on 2026-11-21). The original options and reasoning are summarised so that the reasons stay traceable. Points marked ⚠ carry a known risk; these risks are **accepted for the MVP** and recorded in the [risk register](#accepted-risks-mvp) at the end of this document. No mitigation is implemented in the MVP.
 
 | ID | Topic | Decision | Recommended was |
 |----|-------|----------|-----------------|
@@ -22,6 +22,10 @@ Status: **all decisions taken** (D-01 – D-12 on 2026-11-20; UX decisions D-13 
 | D-15 | Navigation and start page | **Grouped side menu per role; "Today" is the employee start page** | ✔ same |
 | D-16 | Global search | **Not built** (mockup shows it, no use case) | ✔ same |
 | D-17 | Day / week / month views | **Day and Week pages only**; month lives in Balance & summary | ✔ same |
+| D-18 | Project colour | **Auto-assigned, stable per project, optional admin override** (E-01); same colour on every screen | ✔ same |
+| D-19 | Dashboard export | **CSV, Excel and PDF** on the dashboard as well (amends F-05) | Drop PDF |
+| D-20 | Overtime tile | **Cumulative balance** (incl. carry-over), independent of the period filter, labelled as such | ✔ same |
+| D-21 | Dashboard thresholds | **Teams below 90 % completeness get the warning colour (fixed); budgets at 100 % or more get an "over budget" error chip** | ✔ same |
 
 ---
 
@@ -116,6 +120,22 @@ The mockups show a search field in the top bar, but no feature needs it. It is l
 ## D-17 – Day / week / month views → **Day and Week only**
 
 The recording area has a Day page (any date) and a Week page, switched with a Day | Week control. The month view is part of Balance & summary (B-13); there is no separate month page.
+
+## D-18 – Project colour → **Auto-assigned, optional override**
+
+Every project has one colour, used for its dot/bar in the timeline, timesheet, project timer and the hours-by-project donut. The system assigns it from the project palette (§6.5) in a stable order when the project is created; backoffice may override it in the project form (E-01). When there are more projects than palette colours, colours repeat; code and name are always shown next to the colour, so colour is never the only cue. The donut's own "Other" slice stays neutral grey.
+
+## D-19 – Dashboard export → **CSV, Excel and PDF**
+
+The Export menu on the dashboard and the management overview offers all three formats, as drawn in the mockup. F-05 is amended accordingly.
+
+## D-20 – Overtime tile → **Cumulative balance**
+
+The "Overtime balance" tile shows the total balance including the opening balance (U-10) across the people in scope, not the change within the selected period. The tile label says "balance to date" so it is not read against the period's worked/target figures.
+
+## D-21 – Dashboard thresholds → **90 % completeness, over-budget chip**
+
+In "Completeness by team" a team below 90 % gets the warning colour (fixed value, not configurable in the MVP). Project budgets show "on track" below 80 %, the warning chip from 80 %, and a distinct "over budget" error chip (text plus icon) from 100 %.
 
 ---
 

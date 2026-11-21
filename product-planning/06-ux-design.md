@@ -46,7 +46,7 @@ Canvas: <https://claude.ai/code/artifact/a674afbe-657c-404d-a87b-be37ca23ec86> (
 | [approved-screens.pdf](mockups/approved-screens.pdf) | **Primary visual reference.** The six approved screens rendered (pages 1–3: Today, Week, Dashboard light; pages 4–6: the same in dark). Exported from the canvas on 2026-11-21. Compare every implemented screen against it. |
 | `*.dc.html`, `canvas.json` | Source of the artboards (downloaded 2026-11-21, canvas version `1795265364-ea0f`). Use them for exact values – colours, sizes, spacing – that a PDF cannot give reliably. |
 
-The PDF still shows the search field and the Month tab; both are not built (§6.8).
+The PDF still shows the search field and the Month tab; both are not built (§6.8). The sample figures in the mockups are illustrative: the "expected end around 16:45" on Today does not follow the documented formula (it would be about 16:32), the running project timer (1:24) exceeds the unbooked time (0:47), and the donut colours differ from the project colours – the rules in this document win, not the sample values.
 
 Each artboard is one HTML file (inline styles, a small `renderVals()` script holding the light and dark token sets). The files need the canvas runtime (`support.js`) and Google Fonts to render, so opened locally they are **reference source, not a working preview**. The dark artboards only import their light page with `theme="dark"`; the dark values are in the light files' `renderVals()`. To view them rendered, open the canvas, or read them with the Artifact tool (`action: "read_file"`, the canvas URL, `path: "project/Today.dc.html"`). The token table in §6.5 has the same values as those scripts.
 
@@ -108,7 +108,7 @@ Each administration group is one menu entry; its pages are tabs across the top o
 
 The start page for everyone who records time (users without the employee role get a simple start page with links to their areas). Features: B-03, B-07, B-10, B-13, B-14, B-18, H-06. Mockups: `Today.dc.html`, `TodayDark.dc.html`.
 
-Grid of 3 columns:
+Grid of 3 columns. The page title is a localised greeting with the user's first name ("Good afternoon, Anna"); the context line above it holds the date.
 
 1. **Running day (hero, spans 2 columns).** A dark teal panel in both themes, holding:
    - a status chip ("Started 08:02 · 1 break (0:30)")
@@ -119,7 +119,7 @@ Grid of 3 columns:
 
    When no day is running, the same panel shows a Start work day button.
 2. **This week:** a ring chart of worked time against target, a legend (worked, booked, not booked), a mini bar per weekday (complete = accent, today = light accent, missing = warning tint, weekend = empty track), the overtime balance, and an "Open week" link.
-3. **Today's timeline (spans 2 columns):** a horizontal band from 07:00 to 19:00 showing work blocks, the break (hatched in the warning tint), project blocks in project colours and a "now" marker. Below it, a table of today's project entries (project with colour dot, code and name; activity; note; time; edit icon button), with the footer "Booked 5:00 of 5:47 worked · 0:47 not yet booked".
+3. **Today's timeline (spans 2 columns):** a horizontal band from 07:00 to 19:00 showing work blocks, the break (hatched in the warning tint), project blocks in project colours and a "now" marker. An "Edit working times" link at the card's top right opens the "Record a working day" dialog of the Day page for today. Below it, a table of today's project entries (project with colour dot, code and name; activity; note; time; edit icon button), with the footer "Booked 5:00 of 5:47 worked · 0:47 not yet booked".
 4. **Quick booking:** favourite chips (★ project · activity), project and activity selects, duration (pre-filled with the unbooked time), and a full-width "Book 0:47" button.
 5. **Things to check:** a warning card listing rule findings and gaps for today and the current week, each with an action link (Fix, Book).
 
@@ -145,15 +145,16 @@ Features: B-02, B-09, B-10, B-14, B-16. Mockups: `Week.dc.html`, `WeekDark.dc.ht
 
 Features: F-01, F-04, F-05, F-06, F-07, F-14. Mockups: `Dashboard.dc.html`, `DashboardDark.dc.html`.
 
-- A filter row: date range picker (one control, not two date fields), team filter (U-06, F-04), and Export (CSV, Excel, PDF) as a menu on the primary button on the right.
+- A filter row: date range picker (one control, not two date fields), team filter (U-06, F-04), and Export (CSV, Excel, PDF → D-19) as a menu on the primary button on the right.
+- Page title "Company overview" (the menu entry is "Dashboard"; management sees "Management overview").
 - Five figure tiles:
   - Worked (with target)
   - Booked on projects (with % of worked)
   - Completeness (with days without any time, in warning text)
-  - Overtime balance (across N people)
+  - Overtime balance, labelled "balance to date", across N people (D-20: cumulative, not affected by the period filter)
   - Projects near budget (warning tile with a "Review budgets" link)
 - Charts row: Hours per week as grouped bars (worked = accent, booked = blue), with a dashed target line and value labels (spans 2 columns); Hours by project as a donut with the total in the centre and a 2-column legend.
-- Tables row: Project budgets (project, usage bar, used / planned hours, status chip "93 % · over 80 %" in warning style or "47 % · on track" in success style) spanning 2 columns; Completeness by team (one bar per team, warning colour below the threshold).
+- Tables row: Project budgets (project, usage bar, used / planned hours, status chip "93 % · over 80 %" in warning style, "47 % · on track" in success style, or an "over budget" error chip from 100 %, D-21) spanning 2 columns, with an "All budgets" link; Completeness by team (one bar per team, warning colour below 90 %, D-21) with an "Open completeness report" link. Both links are plain navigation (Budgets page, completeness report F-06).
 - The page shows **sums only, never a person's name** (D-10), and says so in the top bar's context line. The **Management overview** is the same page for the management role.
 
 ### 6.4.4 Screens that are not drawn
@@ -203,9 +204,17 @@ Theme: the accent palette is generated from `#0F6B67` (teal). Besides light and 
 | warnBg / warnBorder | `#FFF7F2` / `#F5D3BF` | `#2A1C14` / `#5A3520` | warning cards, chips, tiles |
 | warnInk / warnStrong | `#7C2D12` / `#9A3412` | `#FDD5B8` / `#FB923C` | warning text / emphasis and warning bars |
 | okBg / okBorder / okInk | `#E3F4EA` / `#BFE3CB` / `#166534` | `#12301F` / `#1F4D33` / `#86EFAC` | success chips and checkmarks |
+| errBg / errBorder | `#FEF2F2` / `#F5C2C2` | `#2A1416` / `#5C2A2E` | "over budget" chip (D-21), later error states |
+| errInk / errStrong | `#991B1B` / `#B91C1C` | `#FECACA` / `#F87171` | error text / emphasis; contrast on errBg 7.6 / 5.9 (light), 12.0 / 6.3 (dark) |
 | booked (chart) | `#93B4F5` | `#3E63B0` | booked bars next to worked bars |
-| project 1–4 | `#2563EB` `#7C3AED` `#0F766E` `#B45309` | `#60A5FA` `#A78BFA` `#2DD4BF` `#F59E0B` | project colours in the timeline and timesheet |
-| donut 1–6 | `#1E3A8A` `#3B82F6` `#0D9488` `#EA8A3A` `#A855F7` `#CBD2DC` | `#93C5FD` `#3B82F6` `#2DD4BF` `#F59E0B` `#C084FC` `#4B5563` | hours-by-project chart |
+| project palette 1–4 | `#2563EB` `#7C3AED` `#0F766E` `#B45309` | `#60A5FA` `#A78BFA` `#2DD4BF` `#F59E0B` | project colours in the timeline, timesheet, project timer **and the donut** (D-18: one colour per project, auto-assigned from this palette, optional override; repeats when there are more projects) |
+| partialBar / missingBar | `#8CCFC8` / `#F5C9B3` | `#2E7D77` / `#7A3B1E` | mini bars on Today: today (partial) / day with missing time |
+| workBand / breakBand | `#CDE7E4` / hatch `#F7D7C4`–`#FBE8DC` | `#1F4542` / hatch `#5A3520`–`#46291A` | work block and break (45° hatch, 6 px stripes) in the day timeline |
+| todayBorder | `#9CCFC9` | `#2E6B66` | input border in the today column |
+| weekendCol / weekendBorder | `#F3F5F8` / `#D5DBE3` | `#131B1E` / `#34424A` | weekend columns (dashed inputs) |
+| donut 1–6 | `#1E3A8A` `#3B82F6` `#0D9488` `#EA8A3A` `#A855F7` `#CBD2DC` | `#93C5FD` `#3B82F6` `#2DD4BF` `#F59E0B` `#C084FC` `#4B5563` | **as drawn only** – the mockup colours the donut by rank; per D-18 the donut uses each project's own colour, and only "Other" keeps the neutral grey (donut 6) |
+
+Where the mockup files disagree on a shared value (`Week` uses subtle `#F6F8FA` / `#1B252A` and okInk `#15803D`), the values in this table win. The error tokens (err*) are new, not drawn in the mockups; they follow the same pattern as the warning tokens and meet 4.5:1.
 
 The warning, success, hero and chart colours are usually not part of a component library's standard colour roles. They are defined once as named tokens next to the theme; screens use tokens only, never literal colour values.
 

@@ -77,7 +77,7 @@ Summary: **MVP 62** · **Phase 2 5** · **Out of scope 18** (see tables below; d
 
 | ID | Feature | Description | Priority |
 |----|---------|-------------|----------|
-| E-01 | Create / edit projects | Name, code, description, project lead, start/end date. | MVP |
+| E-01 | Create / edit projects | Name, code, description, project lead, start/end date, project colour (auto-assigned, optional override → **D-18**) | MVP |
 | E-02 | Project status | Active / archived. | MVP |
 | E-03 | Clients | → **D-04b**. | Out of scope |
 | E-04 | Project members | Assign users; mark project as "open to everyone" → **D-06**. | MVP |
@@ -96,7 +96,7 @@ Summary: **MVP 62** · **Phase 2 5** · **Out of scope 18** (see tables below; d
 | F-02 | Project report | Hours per user, per activity, per week/month; entry list; budget consumption. | MVP |
 | F-03 | User report | Working time, project hours, target vs. actual, overtime balance, absences. | MVP |
 | F-04 | Flexible filtering & grouping | Filter and group freely by period, team, project, user, activity. | MVP |
-| F-05 | Export | CSV / Excel for all reports; PDF for user and project reports (e.g. monthly working-time record). | MVP |
+| F-05 | Export | CSV / Excel for all reports; PDF for user and project reports (e.g. monthly working-time record) and for the dashboard / management overview → **D-19**. | MVP |
 | F-06 | Completeness report | Who has missing days or gaps for the period – basis for locking. | MVP |
 | F-07 | Budget report | All projects with budget, consumption, warning state. | MVP |
 | F-08 | Utilization report | → **D-10**. | Out of scope |
